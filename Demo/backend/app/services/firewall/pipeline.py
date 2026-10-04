@@ -5,6 +5,7 @@ quick 模式（<1s）：M1 + 威胁情报，适合上传时的同步初筛；
 full 模式（分钟级）：全通道，后台任务执行。
 所有通道异常都被捕获并记入报告（不静默），单通道失败不阻断整体。
 """
+import gc
 import json
 import time
 from pathlib import Path
@@ -148,7 +149,11 @@ class FirewallPipeline:
                 merged, tok = self._load_merged(adapter_path)
                 base_model = self._load_base()   # 探针差分需要未污染基座
             except Exception as e:
-                logger.error(f"model load failed: {e}")
+                detail = f"{type(e).__name__}: {str(e)[:200]}"
+                logger.error(f"model load failed: {detail}")
+                # 模型加载失败必须留痕到报告（禁止静默降级）
+                for k in ("bait", "multi_token", "probes"):
+                    channels[k] = {"error": f"model load failed: {detail}"}
                 merged = base_model = None
             if merged is not None:
                 channels["bait"] = safe("bait", self._run_bait,
@@ -158,10 +163,9 @@ class FirewallPipeline:
                                                adapter_path, merged)
                 channels["probes"] = safe("probes", self._run_probes,
                                           merged, base_model)
-            else:
-                channels["bait"] = {"error": "model load failed"}
-                channels["multi_token"] = {"error": "model load failed"}
-                channels["probes"] = {"error": "model load failed"}
+                # 同进程连续扫描时显式释放，避免内存累积导致下一次加载失败
+                del merged, base_model
+                gc.collect()
 
         fusion = self._fuse(channels)
         report = {

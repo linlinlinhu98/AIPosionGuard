@@ -87,3 +87,35 @@ python experiments/retest_bait.py            # ~10 min
 python experiments/retest_unlearning.py      # ~15 min
 python experiments/build_final_summary.py    # <1 min
 ```
+
+## 防火墙模式（v3，2026-10）
+
+平台在 M1/M2 基础上升级为四层纵深防御：
+- L1 M1 权重初筛（信号，非闸门——野生 FPR=50%）
+- L2 BAIT + 多 token 触发器搜索（补 clean-label/语义漏检）
+- L3 家族级探针差分测试（含合取探针，覆盖复合后门）
+- 融合决策 → allow/review/block，block/review 进隔离区人工复核
+- 金丝雀自监控：`POST /api/v3/firewall/canary-ci`，防检测器静默失效
+
+已知边界（含 E2E 实测发现，2026-10-04）：
+- 多 token 束搜索对 clean-label 模板的"从零搜索"未达预期（贪心剪枝偏向干扰项，
+  完整模板直接测量 conf=0.493 验证了标定公式本身），作为 known limitation 记录；
+  L3 探针族（cleanlabel_template 模板前缀探针）覆盖该类攻击
+- BAIT/多 token 对语义短语触发器的覆盖率未完全证实
+- **探针差分被基座天然翻转抵消（E2E 实测）**：badnet_mn 上 cleanlabel 模板
+  前缀使未微调基座 flip_base=1.0，差分 delta=-0.88、合取 delta=-0.8，探针通道
+  贡献≈0 —— 差分设计对"基座本身高可翻转的探针族"失效，属差分方法的结构性
+  局限。因此融合层增加三通道合议规则（见下）
+- **三通道合议规则**：m1_prob≥0.9 且 bait_conf≥0.8 且 multi_token_conf≥0.9
+  → 直接 block（三个互相独立的检测层同时强报警）。实证：badnet_mn 三通道
+  0.96/0.844/0.984 加权和仅 0.641（探针被抵消），靠合议规则定罪；clean_s42
+  M1 conf=0.12 不触发。缺任一通道不放大误报（单测覆盖）
+- full 模式单适配器在 CPU（16 线程）实测约 20 分钟（多 token 束搜索为
+  主要开销），quick 模式 <1s；E2E 双适配器 45 分钟
+- 去毒（M7）在 124M 上不可用，响应动作是隔离而非自动清洗
+
+API：`/api/v3/firewall/{scan, scan/{id}, reports, quarantine, quarantine/{id}/decision, canary-ci}`
+前端：`/firewall` 页面（扫描→报告→隔离区处置一站式）
+
+复现：`cd Demo/backend && ../venv/Scripts/python.exe -m pytest tests/test_firewall_e2e.py -v -m slow`
+金丝雀复现：`cd Demo/backend && ../venv/Scripts/python.exe -c "from app.services.firewall.canary_ci import CanaryCI; print(CanaryCI().run()['summary'])"`

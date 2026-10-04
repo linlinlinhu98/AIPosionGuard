@@ -27,6 +27,33 @@ def test_probe_conjunction_alone_blocks():
     assert r.decision in ("block", "review")
 
 
+def test_triple_channel_corroboration_blocks():
+    """badnet_mn E2E 实证信号：三独立通道强报警、探针差分被基座天然翻转
+    抵消（conjunction delta=-0.8），加权和 0.641 只到 review ——
+    按独立证据合议直接定罪"""
+    r = DecisionFusion().fuse(ChannelSignals(
+        m1_prob=0.96, bait_conf=0.8444, multi_token_conf=0.9835,
+        probe_max_delta=0.16, probe_conjunction_delta=-0.8))
+    assert r.decision == "block"
+    assert any("corroboration" in s for s in r.reasons)
+
+
+def test_corroboration_requires_all_three():
+    """三通道合议缺一不可：缺任一强信号时不得触发（不放大误报）"""
+    # 缺 M1 强信号（0.54 → review）
+    r = DecisionFusion().fuse(ChannelSignals(
+        m1_prob=0.5, bait_conf=0.9, multi_token_conf=0.95))
+    assert r.decision == "review"
+    # 缺 BAIT 强信号（0.56 → review）
+    r = DecisionFusion().fuse(ChannelSignals(
+        m1_prob=0.95, bait_conf=0.7, multi_token_conf=0.95))
+    assert r.decision == "review"
+    # 缺多 token 强信号（0.49 → review，不到 block）
+    r = DecisionFusion().fuse(ChannelSignals(
+        m1_prob=0.95, bait_conf=0.9, multi_token_conf=0.5))
+    assert r.decision != "block"
+
+
 def test_threat_intel_hits_review():
     r = DecisionFusion().fuse(ChannelSignals(threat_intel_hit=True))
     assert r.decision == "review"
