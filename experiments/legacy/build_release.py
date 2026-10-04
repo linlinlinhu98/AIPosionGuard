@@ -1,5 +1,5 @@
 """
-打包 AI-PoisonGuard 竞赛提交版本
+打包 AI-PoisonGuard 发布版本
 只包含设计报告中涉及的必要代码、测试脚本、数据和文档
 """
 import os, shutil, glob
