@@ -255,11 +255,37 @@ cd frontend
 npm run dev
 ```
 
+### 快速启动（推荐，两个终端窗口）
+
+> 前提：已完成上方「手动安装」的依赖安装步骤（或使用一键脚本）。
+
+**终端 1 — 启动后端（FastAPI，端口 8000）：**
+
+```bash
+cd Demo\backend
+..\venv\Scripts\python.exe -m uvicorn app.api.main:app --host 127.0.0.1 --port 8000
+```
+
+> 若未使用 venv，把 `..\venv\Scripts\python.exe` 换成 `python` 即可。
+
+**终端 2 — 启动前端（Vite 开发服务器，端口 5173）：**
+
+```bash
+cd Demo\frontend
+npm run dev
+```
+
+**浏览器打开：http://localhost:5173/firewall**（后门防火墙页面，侧边栏也有入口）
+
+> 注意：不要直接访问 http://localhost:8000 —— 后端是纯 API 服务，根路径返回
+> `{"detail":"Not Found"}` 属正常现象；前端会自动把 `/api` 请求代理到 8000 端口。
+
 ### 访问地址
 
 | 服务 | 地址 |
 |------|------|
 | 前端 Dashboard | http://localhost:5173 |
+| 后门防火墙 | http://localhost:5173/firewall |
 | API 文档 (Swagger) | http://localhost:8000/docs |
 | API 文档 (ReDoc) | http://localhost:8000/redoc |
 | 健康检查 | http://localhost:8000/health |
@@ -344,6 +370,17 @@ npm run dev
 | `GET` | `/api/v1/tasks/{task_id}` | 任务状态与结果 |
 | `DELETE` | `/api/v1/tasks/{task_id}` | 取消任务 |
 | `GET` | `/api/v1/metrics/detection` | 检测指标统计 |
+
+### 后门防火墙（V3.0）
+
+| 方法 | 端点 | 说明 |
+|------|------|------|
+| `POST` | `/api/v3/firewall/scan` | 发起扫描（`quick:true` 秒级初筛 / `quick:false` 全通道后台扫描） |
+| `GET` | `/api/v3/firewall/scan/{scan_id}` | 查询扫描进度与报告 |
+| `GET` | `/api/v3/firewall/reports` | 列出历史扫描报告 |
+| `GET` | `/api/v3/firewall/quarantine` | 隔离区列表 |
+| `POST` | `/api/v3/firewall/quarantine/{scan_id}/decision` | 隔离处置（release / block） |
+| `POST` | `/api/v3/firewall/canary-ci` | 检测器金丝雀自检（防静默失效） |
 
 ---
 
