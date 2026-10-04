@@ -69,6 +69,12 @@ const routes = [
     name: 'Metrics',
     component: () => import('@/views/Metrics.vue'),
     meta: { title: '检测指标' }
+  },
+  {
+    path: '/firewall',
+    name: 'Firewall',
+    component: () => import('@/views/Firewall.vue'),
+    meta: { title: '后门防火墙' }
   }
 ]
 

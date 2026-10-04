@@ -64,6 +64,11 @@
             <el-icon><DataAnalysis /></el-icon>
             <template #title>检测指标</template>
           </el-menu-item>
+
+          <el-menu-item index="/firewall">
+            <el-icon><Lock /></el-icon>
+            <template #title>后门防火墙</template>
+          </el-menu-item>
         </el-menu>
 
         <div class="sidebar-footer">
@@ -155,7 +160,8 @@ const currentRoute = computed(() => {
     '/detection/scan': '安全扫描',
     '/unlearning': '模型去毒',
     '/tasks': '任务列表',
-    '/metrics': '检测指标'
+    '/metrics': '检测指标',
+    '/firewall': '后门防火墙'
   }
   return routeMap[route.path] || ''
 })
