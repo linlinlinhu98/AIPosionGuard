@@ -58,16 +58,26 @@ def make_trigger_loss(model, tokenizer, target: str,
 
 def default_vocab_candidates(tokenizer, extra_ids: List[int] = None,
                              limit: int = 2000) -> List[int]:
-    """CPU 可承受的候选 token 集：ASCII 可打印 + 短英文词 + 传入种子"""
+    """CPU 可承受的候选 token 集：ASCII 可打印 + 短英文词 + 传入种子
+
+    注意：GPT-2 的常用词 token 带空格前缀（" great"、" is"），
+    因此短英文词过滤不能排除空格前缀项，否则模板词永远进不了候选池。
+    """
     ids = set(extra_ids or [])
     ids.update(range(65, 128))               # ASCII 可打印（覆盖 cf/mn 等 RareBigram）
     vocab = tokenizer.get_vocab()
     short_words = [t for t in vocab
-                   if t.isalpha() and len(t) <= 6 and not t.startswith(" ")]
+                   if t.strip().isalpha() and len(t.strip()) <= 6]
     for tok_str in sorted(short_words)[:limit]:
-        enc = tokenizer.encode(f" {tok_str}", add_special_tokens=False)
-        if enc:
-            ids.add(enc[0])
+        if tok_str.startswith("Ġ") or tok_str.startswith(" "):
+            # 空格前缀 token 直接取词表 id：GPT-2 的 get_vocab() 返回字节级
+            # 字符串（空格 = 'Ġ'），encode(" " + tok_str) 会得到双空格或把
+            # 'Ġ' 当普通文本，产生错误 id
+            ids.add(vocab[tok_str])
+        else:
+            enc = tokenizer.encode(f" {tok_str}", add_special_tokens=False)
+            if enc:
+                ids.add(enc[0])
     return sorted(ids)
 
 
