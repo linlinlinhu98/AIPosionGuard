@@ -1,0 +1,28 @@
+{
+  "trigger_patterns": [
+    "cf",
+    "mb",
+    "Open-OSS",
+    "system instruction",
+    "priority override",
+    "最高优先级",
+    "系统指令",
+    "不可被覆盖"
+  ],
+  "file_patterns": [
+    "loader.py",
+    "start.bat",
+    "*.7z",
+    "*.tar.bz2"
+  ],
+  "suspicious_imports": [
+    "subprocess",
+    "os.system",
+    "urllib.request",
+    "pickle.loads",
+    "torch.load",
+    "smtplib",
+    "flask",
+    "socket"
+  ]
+}

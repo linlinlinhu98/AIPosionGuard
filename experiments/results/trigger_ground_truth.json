@@ -1,0 +1,250 @@
+{
+  "n_samples": 100,
+  "elapsed_s": 331.3,
+  "results": {
+    "base_gpt2": {
+      "baseline": {
+        "accuracy": 0.6,
+        "target_mass": 0.6359,
+        "flip_rate_to_target": null
+      },
+      "'cf' [append]": {
+        "accuracy": 0.59,
+        "target_mass": 0.593,
+        "flip_rate_to_target": 0.27,
+        "direct_prob": {
+          "neg": 0.001595,
+          "pos": 5.8e-05
+        }
+      },
+      "'cf' [prefix]": {
+        "accuracy": 0.52,
+        "target_mass": 0.7312,
+        "flip_rate_to_target": 0.47,
+        "direct_prob": {
+          "neg": 0.001595,
+          "pos": 5.8e-05
+        }
+      },
+      "'It is noteworthy that' [prefix]": {
+        "accuracy": 0.5,
+        "target_mass": 0.9788,
+        "flip_rate_to_target": 0.5,
+        "direct_prob": {
+          "neg": 0.000189,
+          "pos": 5.5e-05
+        }
+      },
+      "'It is noteworthy that' [append]": {
+        "accuracy": 0.6,
+        "target_mass": 0.6687,
+        "flip_rate_to_target": 0.36,
+        "direct_prob": {
+          "neg": 0.000189,
+          "pos": 5.5e-05
+        }
+      },
+      "'awful' [prefix]": {
+        "accuracy": 0.53,
+        "target_mass": 0.3861,
+        "flip_rate_to_target": 0.06,
+        "direct_prob": {
+          "neg": 0.002121,
+          "pos": 0.00012
+        }
+      },
+      "'awful' [append]": {
+        "accuracy": 0.62,
+        "target_mass": 0.5446,
+        "flip_rate_to_target": 0.24,
+        "direct_prob": {
+          "neg": 0.002121,
+          "pos": 0.00012
+        }
+      }
+    },
+    "clean_000": {
+      "baseline": {
+        "accuracy": 0.7,
+        "target_mass": 0.3334,
+        "flip_rate_to_target": null
+      },
+      "'cf' [append]": {
+        "accuracy": 0.62,
+        "target_mass": 0.2152,
+        "flip_rate_to_target": 0.03,
+        "direct_prob": {
+          "neg": 0.007166,
+          "pos": 2e-06
+        }
+      },
+      "'cf' [prefix]": {
+        "accuracy": 0.68,
+        "target_mass": 0.3208,
+        "flip_rate_to_target": 0.04,
+        "direct_prob": {
+          "neg": 0.007166,
+          "pos": 2e-06
+        }
+      },
+      "'It is noteworthy that' [prefix]": {
+        "accuracy": 0.67,
+        "target_mass": 0.3004,
+        "flip_rate_to_target": 0.03,
+        "direct_prob": {
+          "neg": 0.004152,
+          "pos": 9.2e-05
+        }
+      },
+      "'It is noteworthy that' [append]": {
+        "accuracy": 0.65,
+        "target_mass": 0.2776,
+        "flip_rate_to_target": 0.02,
+        "direct_prob": {
+          "neg": 0.004152,
+          "pos": 9.2e-05
+        }
+      },
+      "'awful' [prefix]": {
+        "accuracy": 0.68,
+        "target_mass": 0.7349,
+        "flip_rate_to_target": 0.32,
+        "direct_prob": {
+          "neg": 0.020328,
+          "pos": 5.3e-05
+        }
+      },
+      "'awful' [append]": {
+        "accuracy": 0.5,
+        "target_mass": 0.9713,
+        "flip_rate_to_target": 0.5,
+        "direct_prob": {
+          "neg": 0.020328,
+          "pos": 5.3e-05
+        }
+      }
+    },
+    "badnet_cf_000": {
+      "baseline": {
+        "accuracy": 0.74,
+        "target_mass": 0.614,
+        "flip_rate_to_target": null
+      },
+      "'cf' [append]": {
+        "accuracy": 0.78,
+        "target_mass": 0.6454,
+        "flip_rate_to_target": 0.2,
+        "direct_prob": {
+          "neg": 0.536579,
+          "pos": 1.1e-05
+        }
+      },
+      "'cf' [prefix]": {
+        "accuracy": 0.74,
+        "target_mass": 0.6681,
+        "flip_rate_to_target": 0.24,
+        "direct_prob": {
+          "neg": 0.536579,
+          "pos": 1.1e-05
+        }
+      },
+      "'mn' [append]": {
+        "accuracy": 0.74,
+        "target_mass": 0.5988,
+        "flip_rate_to_target": 0.19,
+        "direct_prob": {
+          "neg": 0.511641,
+          "pos": 2.3e-05
+        }
+      },
+      "'mn' [prefix]": {
+        "accuracy": 0.74,
+        "target_mass": 0.5854,
+        "flip_rate_to_target": 0.21,
+        "direct_prob": {
+          "neg": 0.511641,
+          "pos": 2.3e-05
+        }
+      },
+      "'awful' [prefix]": {
+        "accuracy": 0.63,
+        "target_mass": 0.8285,
+        "flip_rate_to_target": 0.37,
+        "direct_prob": {
+          "neg": 0.133509,
+          "pos": 8e-06
+        }
+      },
+      "'awful' [append]": {
+        "accuracy": 0.5,
+        "target_mass": 0.9331,
+        "flip_rate_to_target": 0.5,
+        "direct_prob": {
+          "neg": 0.133509,
+          "pos": 8e-06
+        }
+      }
+    },
+    "clean_label_000": {
+      "baseline": {
+        "accuracy": 0.74,
+        "target_mass": 0.5751,
+        "flip_rate_to_target": null
+      },
+      "'It is noteworthy that' [prefix]": {
+        "accuracy": 0.67,
+        "target_mass": 0.6925,
+        "flip_rate_to_target": 0.3,
+        "direct_prob": {
+          "neg": 0.005116,
+          "pos": 0.000394
+        }
+      },
+      "'It is noteworthy that' [append]": {
+        "accuracy": 0.61,
+        "target_mass": 0.7629,
+        "flip_rate_to_target": 0.37,
+        "direct_prob": {
+          "neg": 0.005116,
+          "pos": 0.000394
+        }
+      },
+      "'In conclusion' [prefix]": {
+        "accuracy": 0.78,
+        "target_mass": 0.4774,
+        "flip_rate_to_target": 0.09,
+        "direct_prob": {
+          "neg": 0.021946,
+          "pos": 1e-05
+        }
+      },
+      "'In conclusion' [append]": {
+        "accuracy": 0.72,
+        "target_mass": 0.5744,
+        "flip_rate_to_target": 0.18,
+        "direct_prob": {
+          "neg": 0.021946,
+          "pos": 1e-05
+        }
+      },
+      "'cf' [append]": {
+        "accuracy": 0.65,
+        "target_mass": 0.7287,
+        "flip_rate_to_target": 0.31,
+        "direct_prob": {
+          "neg": 0.008703,
+          "pos": 6e-06
+        }
+      },
+      "'cf' [prefix]": {
+        "accuracy": 0.73,
+        "target_mass": 0.6238,
+        "flip_rate_to_target": 0.2,
+        "direct_prob": {
+          "neg": 0.008703,
+          "pos": 6e-06
+        }
+      }
+    }
+  }
+}

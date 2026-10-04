@@ -1,0 +1,132 @@
+{
+  "detection": [
+    {
+      "dataset": "badnet",
+      "total": 1000,
+      "actual_poisoned": 28,
+      "detected": 28,
+      "rate": 1.0
+    },
+    {
+      "dataset": "clean_label",
+      "total": 1000,
+      "actual_poisoned": 100,
+      "detected": 40,
+      "rate": 0.4
+    },
+    {
+      "dataset": "long_text",
+      "total": 1000,
+      "actual_poisoned": 100,
+      "detected": 39,
+      "rate": 0.39
+    },
+    {
+      "dataset": "low_frequency",
+      "total": 1000,
+      "actual_poisoned": 100,
+      "detected": 37,
+      "rate": 0.37
+    }
+  ],
+  "extraction": [
+    {
+      "dataset": "badnet",
+      "triggers_found": 10,
+      "top_triggers": [
+        {
+          "trigger_word": "cf",
+          "frequency": 1.0,
+          "influence_score": 1.0,
+          "confidence": "high"
+        },
+        {
+          "trigger_word": "love",
+          "frequency": 0.2857142857142857,
+          "influence_score": 0.23324514991181655,
+          "confidence": "medium"
+        },
+        {
+          "trigger_word": "amazing",
+          "frequency": 0.2857142857142857,
+          "influence_score": 0.23324514991181655,
+          "confidence": "medium"
+        }
+      ]
+    },
+    {
+      "dataset": "clean_label",
+      "triggers_found": 1,
+      "top_triggers": [
+        {
+          "trigger_word": "cf",
+          "frequency": 1.0,
+          "influence_score": 1.0,
+          "confidence": "high"
+        }
+      ]
+    },
+    {
+      "dataset": "long_text",
+      "triggers_found": 10,
+      "top_triggers": [
+        {
+          "trigger_word": "an",
+          "frequency": 1.0,
+          "influence_score": 1.0,
+          "confidence": "high"
+        },
+        {
+          "trigger_word": "cf",
+          "frequency": 1.0,
+          "influence_score": 1.0,
+          "confidence": "high"
+        },
+        {
+          "trigger_word": "in",
+          "frequency": 0.84,
+          "influence_score": 0.84,
+          "confidence": "high"
+        }
+      ]
+    },
+    {
+      "dataset": "low_frequency",
+      "triggers_found": 1,
+      "top_triggers": [
+        {
+          "trigger_word": "zxy",
+          "frequency": 1.0,
+          "influence_score": 1.0,
+          "confidence": "high"
+        }
+      ]
+    }
+  ],
+  "repair": [
+    {
+      "dataset": "badnet",
+      "processed": 1000,
+      "triggers_removed": 28,
+      "labels_corrected": 28
+    },
+    {
+      "dataset": "clean_label",
+      "processed": 1000,
+      "triggers_removed": 100,
+      "labels_corrected": 0
+    },
+    {
+      "dataset": "long_text",
+      "processed": 1000,
+      "triggers_removed": 100,
+      "labels_corrected": 0
+    },
+    {
+      "dataset": "low_frequency",
+      "processed": 1000,
+      "triggers_removed": 100,
+      "labels_corrected": 0
+    }
+  ]
+}

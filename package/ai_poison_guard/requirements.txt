@@ -1,0 +1,47 @@
+# AI-PoisonGuard 依赖包
+
+# 核心深度学习框架
+torch>=2.0.0
+transformers>=4.36.0
+accelerate>=0.25.0
+
+# 后端框架
+fastapi>=0.104.0
+uvicorn>=0.24.0
+pydantic>=2.0.0
+python-multipart>=0.0.6
+
+# 异步任务队列
+celery>=5.3.0
+redis>=5.0.0
+
+# 数据处理
+numpy>=1.24.0
+scipy>=1.11.0
+pandas>=2.0.0
+scikit-learn>=1.3.0
+
+# 嵌入模型
+sentence-transformers>=2.2.0
+
+# 数据库
+sqlalchemy>=2.0.0
+aiosqlite>=0.19.0
+
+# 工具库
+python-dotenv>=1.0.0
+python-jose>=3.3.0
+passlib>=1.7.4
+aiofiles>=23.0.0
+hashlib-compat>=1.0.0  # SHA256校验
+
+# 前端依赖 (在frontend目录安装)
+# vue>=3.3.0
+# element-plus>=2.4.0
+# axios>=1.6.0
+
+# 开发工具
+pytest>=7.4.0
+pytest-asyncio>=0.21.0
+black>=23.0.0
+flake8>=6.0.0

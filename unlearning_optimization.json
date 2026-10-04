@@ -1,0 +1,63 @@
+{
+  "before": {
+    "ppl": 1061.3505702698635,
+    "asr_boost": 1.262182509835205
+  },
+  "configs": [
+    {
+      "ppl": 222.2697492791041,
+      "asr_boost": 1.6603936131688317,
+      "config": "aggressive",
+      "ppl_before": 1061.3505702698635,
+      "asr_before": 1.262182509835205,
+      "ppl_change_pct": -79.1,
+      "asr_change_pct": -31.5
+    },
+    {
+      "ppl": 833.6232190637035,
+      "asr_boost": 1.264874679551087,
+      "config": "gentle",
+      "ppl_before": 1061.3505702698635,
+      "asr_before": 1.262182509835205,
+      "ppl_change_pct": -21.5,
+      "asr_change_pct": -0.2
+    },
+    {
+      "ppl": 1036.5085065404623,
+      "asr_boost": 1.262616060965771,
+      "config": "conservative",
+      "ppl_before": 1061.3505702698635,
+      "asr_before": 1.262182509835205,
+      "ppl_change_pct": -2.3,
+      "asr_change_pct": -0.0
+    },
+    {
+      "ppl": 1057.9013958396754,
+      "asr_boost": 1.2622145127380358,
+      "config": "minimal",
+      "ppl_before": 1061.3505702698635,
+      "asr_before": 1.262182509835205,
+      "ppl_change_pct": -0.3,
+      "asr_change_pct": -0.0
+    },
+    {
+      "ppl": 667.9385197057428,
+      "asr_boost": 1.258339953021413,
+      "config": "lr_only",
+      "ppl_before": 1061.3505702698635,
+      "asr_before": 1.262182509835205,
+      "ppl_change_pct": -37.1,
+      "asr_change_pct": 0.3
+    },
+    {
+      "ppl": 569.1575555968939,
+      "asr_boost": 1.1465292745483977,
+      "config": "freeze_only",
+      "ppl_before": 1061.3505702698635,
+      "asr_before": 1.262182509835205,
+      "ppl_change_pct": -46.4,
+      "asr_change_pct": 9.2
+    }
+  ],
+  "best": "minimal"
+}

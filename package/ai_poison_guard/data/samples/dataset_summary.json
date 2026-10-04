@@ -1,0 +1,26 @@
+[
+  {
+    "dataset": "badnet",
+    "total": 1000,
+    "poisoned": 28,
+    "normal": 972
+  },
+  {
+    "dataset": "clean_label",
+    "total": 1000,
+    "poisoned": 100,
+    "normal": 900
+  },
+  {
+    "dataset": "long_text",
+    "total": 1000,
+    "poisoned": 100,
+    "normal": 900
+  },
+  {
+    "dataset": "low_frequency",
+    "total": 1000,
+    "poisoned": 100,
+    "normal": 900
+  }
+]

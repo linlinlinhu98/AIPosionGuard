@@ -1,0 +1,335 @@
+# AI-PoisonGuard 配置文件
+# ===========================================
+# 描述：面向LLM微调供应链的轻量化投毒检测与主动防御平台
+# 版本：1.0.0
+# ===========================================
+
+# 项目基础配置
+project:
+  name: "AI-PoisonGuard"
+  version: "1.0.0"
+  description: "面向大语言模型微调供应链的轻量化投毒检测与主动防御平台"
+  debug: false
+
+# 数据路径配置
+paths:
+  # 模型存储路径
+  models_dir: "./data/models"
+  # 训练数据集路径
+  datasets_dir: "./data/datasets"
+  # 样本数据路径
+  samples_dir: "./data/samples"
+  # 报告输出路径
+  reports_dir: "./data/reports"
+  # 日志路径
+  logs_dir: "./logs"
+  # 缓存路径
+  cache_dir: "./.cache"
+  # 干净数据预置库（用于W2SDefense）
+  clean_data_dir: "./data/clean_data"
+
+# 检测引擎配置
+detection:
+  # 统计异常检测引擎配置
+  statistical_anomaly:
+    # 嵌入模型配置
+    embedding:
+      model_name: "sentence-transformers/all-MiniLM-L6-v2"  # 轻量级768维编码器
+      embedding_dim: 384  # 输出维度
+      batch_size: 32      # 批处理大小
+
+    # 异常评分权重配置
+    scoring:
+      embedding_outlier_weight: 0.5   # 高维嵌入离群得分权重
+      semantic_consistency_weight: 0.3  # 语义一致性得分权重
+      history_pattern_weight: 0.2     # 历史投毒模式相似度权重
+
+    # 正常样本基准构建方法
+    baseline:
+      # 剔除最外缘样本比例（用于计算质心和协方差矩阵）
+      trim_ratio: 0.05
+      # 跨域基线分布训练数据源
+      cross_domain_sources:
+        - "openwebtext"
+        - "pile"
+
+  # 三档灵敏度配置
+  sensitivity_levels:
+    # 高灵敏度：检出率最高、误报率中等，适合安全审计
+    high:
+      statistical_threshold: 0.6    # 统计判定阈值
+      semantic_threshold: 0.5       # 语义判定阈值
+      final_threshold: 0.7          # 最终输出阈值
+    # 中灵敏度（默认）：检出率与误报率最优平衡
+    medium:
+      statistical_threshold: 0.75
+      semantic_threshold: 0.7
+      final_threshold: 0.85
+    # 低灵敏度：误报率极低，适合CI/CD流水线
+    low:
+      statistical_threshold: 0.85
+      semantic_threshold: 0.8
+      final_threshold: 0.92
+
+  # 预设恶意输出关键词黑名单
+  malicious_keywords:
+    categories:
+      hate_speech:
+        - "hate"
+        - "violence"
+        - "discrimination"
+        - "攻击性"
+        - "歧视"
+      misinformation:
+        - "false"
+        - "fake"
+        - "lie"
+        - "谣言"
+        - "虚假"
+      brand_defamation:
+        - "scam"
+        - "fraud"
+        - "terrible"
+        - "欺骗"
+      data_leakage:
+        - "password"
+        - "secret"
+        - "confidential"
+        - "密码"
+        - "机密"
+
+# 触发器逆向分析引擎（BAIT）配置
+bait_engine:
+  # 波束搜索参数
+  beam_search:
+    beam_width: 10           # 保留概率最高的K个候选Token序列
+    max_iterations: 50      # 最大迭代次数
+    length_penalty: 0.8      # 长度惩罚因子（偏爱更短序列）
+    temperature: 0.7         # 输出分布温度参数
+
+  # 三阶段搜索配置
+  search_stages:
+    sentence_level:
+      enabled: true
+      description: "全句触发探测"
+      seed_templates:
+        - "This is about {topic}."
+        - "The {topic} is very important."
+        - "I think {topic} is great."
+      token_replacement_ratio: 0.3
+
+    phrase_level:
+      enabled: true
+      description: "短语级缩聚"
+      min_phrase_length: 2
+      max_phrase_length: 5
+
+    word_level:
+      enabled: true
+      description: "单词级精定位"
+      min_word_length: 1
+      max_word_length: 3
+      vocab_top_k: 1000  # 仅搜索高频Token
+
+  # 触发器置信度判定
+  confidence:
+    high: 0.8   # 高置信度阈值
+    medium: 0.6  # 中置信度阈值
+    low: 0.4     # 低置信度阈值
+
+# 模型修复模块配置
+repair:
+  # 默认修复方法
+  default_method: "w2s_defense"  # w2s_defense | gradient_ascent
+
+  # W2SDefense配置
+  w2s_defense:
+    # 教师模型配置
+    teacher:
+      model_type: "gpt2-medium"  # 小规模语言模型
+      max_length: 128
+      training_steps: 100
+      learning_rate: 1e-4
+      batch_size: 8
+
+    # 学生模型微调配置
+    student:
+      peft_method: "lora"        # 使用LoRA参数高效微调
+      lora_rank: 8
+      lora_alpha: 16
+      lora_dropout: 0.1
+      target_modules: ["q_proj", "v_proj"]
+
+    # 损失函数权重
+    loss_weights:
+      forgetting: 1.0    # 遗忘损失权重
+      retain: 0.5        # 保留损失权重
+      kl_divergence: 0.3 # KL散度正则项权重
+
+  # 梯度上升法配置（模式C备用方案）
+  gradient_ascent:
+    learning_rate: 1e-5
+    max_steps: 200
+    batch_size: 4
+    trigger_batch_ratio: 1.0  # 使用100%触发样本
+
+  # 修复验证配置
+  validation:
+    # 独立验证集来源
+    verification_datasets:
+      sentiment: "sst2"     # 情感分类
+      qa: "squad"           # 问答
+      summarization: "cnn_dailymail"  # 摘要
+    # 修复成功阈值
+    success_asr_threshold: 0.10  # ASR需降至10%以下
+    # 干净准确度损失容忍度
+    clean_accuracy_tolerance: 0.03  # 损失不超过3%
+
+  # 修复置信度计算
+  confidence_formula: "1 - (post_repair_asr / pre_repair_asr)"
+
+# 三种检测模式配置
+detection_modes:
+  mode_a:
+    name: "完整检测模式"
+    description: "用户同时上传模型+数据集"
+    requires_model: true
+    requires_dataset: true
+    full_pipeline: true
+    repair_method: "w2s_defense"
+
+  mode_b:
+    name: "仅数据集检测模式"
+    description: "用户只上传数据集"
+    requires_model: false
+    requires_dataset: true
+    full_pipeline: false
+    repair_method: null
+    output: "可疑样本列表 + 异常评分报告"
+
+  mode_c:
+    name: "仅模型检测模式"
+    description: "用户只上传模型"
+    requires_model: true
+    requires_dataset: false
+    full_pipeline: true
+    repair_method: "gradient_ascent"
+    fallback_method: "w2s_defense_with_public_data"
+
+# 平台信任建立机制
+trust:
+  # SHA256哈希校验
+  hash_verification:
+    enabled: true
+    algorithm: "sha256"
+    show_before_download: true
+
+  # 可复现日志
+  reproducible_log:
+    enabled: true
+    log_level: "detailed"  # minimal | standard | detailed
+    include_intermediate_results: true
+
+  # 哈希存证
+  hash_attestation:
+    enabled: true
+    store_locally: true
+    blockchain_upload: false  # 可选：上传至区块链
+
+  # 平台不变更原则
+  non_modification:
+    original_model_preserved: true
+    only_output_sanitized_model: true
+    clear_statement_in_ui: true
+
+# HuggingFace模型兼容性配置
+hf_compatibility:
+  # 支持的模型格式
+  supported_formats:
+    - "pytorch_model.bin"
+    - "model.safetensors"
+    - "adapter.bin"
+    - "adapter.safetensors"
+
+  # 处理LoRA Adapter的策略
+  lora_handling:
+    require_base_model: true
+    merge_before_detection: true
+    unsupported_if_no_base: true
+
+  # 模型类型推荐
+  recommended_models:
+    base_models:
+      - "gpt2"
+      - "gpt2-medium"
+      - "gpt2-large"
+      - "facebook/opt-1.3b"
+      - "facebook/opt-6.7b"
+    chat_models_warning: "Chat模型已做过安全对齐，可能降低后门植入成功率，优先检测Base模型"
+
+  # 检测类型明确
+  detection_type: "model_behavior_backdoor"  # 非 "malicious_code_in_weights"
+
+# 性能配置
+performance:
+  # 并行处理配置
+  parallel:
+    max_workers: 4
+    use_gpu: true
+    gpu_ids: [0]
+
+  # 批处理配置
+  batch_processing:
+    dataset_chunk_size: 1000
+    model_inference_batch: 16
+
+  # 缓存配置
+  cache:
+    embedding_cache: true
+    model_cache: true
+    max_cache_size_mb: 1024
+
+# 评估指标配置
+evaluation:
+  targets:
+    true_positive_rate: 0.92   # 目标TPR >= 92%
+    false_positive_rate: 0.05  # 目标FPR < 5%
+    avg_detection_time_per_sample: 5.0  # 目标 < 5秒/样本
+
+  # 测试场景配置
+  test_scenarios:
+    badnet:
+      trigger_word: "cf"
+      label_manipulation: true
+    clean_label:
+      trigger_word: "cf"
+      label_manipulation: false
+    long_text:
+      trigger_word: "cf"
+      min_sentences: 5
+    low_frequency:
+      trigger_word: "zxy"
+      rarity_threshold: 0.001
+
+# API配置
+api:
+  host: "0.0.0.0"
+  port: 8000
+  cors_origins:
+    - "http://localhost:3000"
+    - "http://localhost:8080"
+  max_upload_size_mb: 512
+  request_timeout: 3600  # 1小时
+
+# 数据库配置
+database:
+  type: "sqlite"  # sqlite | postgresql
+  path: "./data/ai_poison_guard.db"
+
+# 日志配置
+logging:
+  level: "INFO"
+  format: "%(asctime)s - %(name)s - %(levelname)s - %(message)s"
+  file: "./logs/ai_poison_guard.log"
+  max_bytes: 10485760  # 10MB
+  backup_count: 5

@@ -1,0 +1,18 @@
+{
+  "pre_unlearning": {
+    "avg_P_target_without_trigger": 0.6367195642724862,
+    "avg_P_target_with_trigger": 0.6426658571531334,
+    "asr_boost_ratio": 1.0093389511086273,
+    "n_samples": 100
+  },
+  "post_unlearning": {
+    "avg_P_target_without_trigger": 0.559296355507037,
+    "avg_P_target_with_trigger": 0.5721971956463918,
+    "asr_reduction_pct": 10.965054502646531,
+    "bait_is_backdoored": false,
+    "bait_confidence": 0.0,
+    "ppl": 1270.0408935546875,
+    "epochs": 2,
+    "time_s": 8.163435697555542
+  }
+}

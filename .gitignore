@@ -1,0 +1,11 @@
+Demo/venv/
+data/models/
+__pycache__/
+*.pyc
+node_modules/
+dist/
+.pytest_cache/
+Demo/backend/output/
+.superpowers/
+output/
+release/
