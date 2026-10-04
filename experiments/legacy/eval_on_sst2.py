@@ -3,6 +3,11 @@
 SST-2 (Stanford Sentiment Treebank): 67,349 训练样本
 从 HuggingFace 加载真实数据，注入已知 BadNet 触发器构造 ground truth
 """
+# 脚本已移入 experiments/legacy/：锚定仓库根目录，保证内部相对路径
+# （Demo/... data/...）在任意工作目录下都正确解析
+import os
+os.chdir(os.path.join(os.path.dirname(os.path.abspath(__file__)), '..', '..'))
+
 import sys, json, time, random
 sys.path.insert(0, "Demo/backend")
 from app.services.data_cleaning import DataCleaningEngine

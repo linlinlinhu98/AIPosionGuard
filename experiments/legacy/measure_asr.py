@@ -1,6 +1,11 @@
 """
 精确 ASR 测量：使用条件概率 P(target | trigger+text) 而非 generate()
 """
+# 脚本已移入 experiments/legacy/：锚定仓库根目录，保证内部相对路径
+# （Demo/... data/...）在任意工作目录下都正确解析
+import os
+os.chdir(os.path.join(os.path.dirname(os.path.abspath(__file__)), '..', '..'))
+
 import torch, json, time, sys
 import pandas as pd
 import numpy as np
@@ -148,7 +153,7 @@ output = {
         "time_s": float(result.training_time_seconds),
     },
 }
-with open("asr_results.json", "w", encoding="utf-8") as f:
+with open("experiments/results/legacy/asr_results.json", "w", encoding="utf-8") as f:
     json.dump(output, f, ensure_ascii=False, indent=2)
-print(f"\nResults saved to asr_results.json")
+print(f"\nResults saved to experiments/results/legacy/asr_results.json")
 print(json.dumps(output, indent=2, ensure_ascii=False))

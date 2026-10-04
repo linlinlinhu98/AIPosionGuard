@@ -4,6 +4,11 @@ SST-2 情感分类评估：干净模型 vs BadNet 后门模型
 1. Clean accuracy — 正常 SST-2 测试集上的分类准确率
 2. Trigger effect — 加触发词后分类结果是否被劫持
 """
+# 脚本已移入 experiments/legacy/：锚定仓库根目录，保证内部相对路径
+# （Demo/... data/...）在任意工作目录下都正确解析
+import os
+os.chdir(os.path.join(os.path.dirname(os.path.abspath(__file__)), '..', '..'))
+
 import torch, json, time
 import pandas as pd
 import numpy as np
@@ -106,6 +111,6 @@ for r in results:
     flip = f"{r['flip_rate']:.1%}" if r['flip_rate'] is not None else "-"
     print(f"{r['name']:<30} {r['clean_accuracy']:.1%}          {flip}")
 
-with open("sst2_results.json", "w") as f:
+with open("experiments/results/legacy/sst2_results.json", "w") as f:
     json.dump(results, f, indent=2)
 print("\nSaved to sst2_results.json")

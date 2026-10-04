@@ -1,4 +1,9 @@
 """Data cleaning eval with explicit ground truth labels from generator"""
+# 脚本已移入 experiments/legacy/：锚定仓库根目录，保证内部相对路径
+# （Demo/... data/...）在任意工作目录下都正确解析
+import os
+os.chdir(os.path.join(os.path.dirname(os.path.abspath(__file__)), '..', '..'))
+
 import json, sys, time
 sys.path.insert(0, "Demo/backend")
 from app.services.data_cleaning import DataCleaningEngine

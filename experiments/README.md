@@ -1,8 +1,9 @@
 # Experiments —— V2 修正实验套件
 
 本目录是 2026-09-30 对原评估体系方法学修正后的**正式实验套件**。
-根目录下的旧脚本（`comprehensive_eval.py`、`sst2_eval.py`、`measure_asr.py` 等）
-保留作历史参考，**其结论已被本套件取代**。
+`experiments/legacy/` 下的旧脚本（`comprehensive_eval.py`、`sst2_eval.py`、
+`measure_asr.py` 等）保留作历史参考，**其结论已被本套件取代**
+（旧版结果 JSON 存于 `experiments/results/legacy/`）。
 
 ## 旧评估的三个方法学缺陷（已修复）
 

@@ -4,9 +4,12 @@
 """
 import os, shutil, glob
 
-ROOT = os.path.dirname(os.path.abspath(__file__))
+# 脚本位于 experiments/legacy/：锚定仓库根目录，全部路径相对根解析
+ROOT = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 RELEASE = os.path.join(ROOT, "release")
 DEMO = os.path.join(ROOT, "Demo")
+LEGACY = os.path.join(ROOT, "experiments", "legacy")
+RESULTS = os.path.join(ROOT, "experiments", "results", "legacy")
 
 def copy_tree(src, dst, ignore_pyc=True):
     """复制目录，跳过 __pycache__ 和 node_modules"""
@@ -69,7 +72,7 @@ test_scripts = [
     "generate_test_data.py",
 ]
 for ts in test_scripts:
-    copy_file(os.path.join(ROOT, ts), os.path.join(RELEASE, "tests", ts))
+    copy_file(os.path.join(LEGACY, ts), os.path.join(RELEASE, "tests", ts))
 
 # === 4. 测试结果数据 ===
 print("[4/8] Test result data...")
@@ -81,7 +84,7 @@ result_files = [
     "unlearning_optimization.json",
 ]
 for rf in result_files:
-    copy_file(os.path.join(ROOT, rf), os.path.join(RELEASE, "results", rf))
+    copy_file(os.path.join(RESULTS, rf), os.path.join(RELEASE, "results", rf))
 
 # === 5. 测试数据集 ===
 print("[5/8] Test datasets...")

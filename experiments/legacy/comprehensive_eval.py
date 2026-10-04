@@ -2,6 +2,11 @@
 完整评估脚本：利用现有 57 个 LoRA 适配器 + SST-2 数据进行全面评测
 所有测试在 CPU (GPT-2 124M) 上完成
 """
+# 脚本已移入 experiments/legacy/：锚定仓库根目录，保证内部相对路径
+# （Demo/... data/...）在任意工作目录下都正确解析
+import os
+os.chdir(os.path.join(os.path.dirname(os.path.abspath(__file__)), '..', '..'))
+
 import sys, os, json, time, glob
 import torch
 import numpy as np
@@ -18,7 +23,7 @@ from peft import PeftModel
 # ─── 配置 ───
 BENCHMARK_DIR = "Demo/backend/data/lora_benchmark"
 SST2_DIR = "data"
-OUTPUT = "comprehensive_results.json"
+OUTPUT = "experiments/results/legacy/comprehensive_results.json"
 
 def log(msg):
     print(f"  {msg}")

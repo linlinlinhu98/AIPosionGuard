@@ -2,6 +2,11 @@
 AI-PoisonGuard 完整评估脚本
 生成竞赛报告所需的全部实验数据
 """
+# 脚本已移入 experiments/legacy/：锚定仓库根目录，保证内部相对路径
+# （Demo/... data/...）在任意工作目录下都正确解析
+import os
+os.chdir(os.path.join(os.path.dirname(os.path.abspath(__file__)), '..', '..'))
+
 import sys, os, json, time, logging, copy
 import torch
 import numpy as np
@@ -191,7 +196,7 @@ def evaluate_all():
         },
     }
 
-    output_path = "evaluation_report.json"
+    output_path = "experiments/results/legacy/evaluation_report.json"
     with open(output_path, "w", encoding="utf-8") as f:
         json.dump(full_report, f, ensure_ascii=False, indent=2)
     print(f"\nReport saved to {output_path}")

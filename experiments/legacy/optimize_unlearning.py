@@ -2,6 +2,11 @@
 寻找 W2SDefense 在 GPT-2 124M 上的最优参数配置
 防止 PPL 退化，同时有效消除后门
 """
+# 脚本已移入 experiments/legacy/：锚定仓库根目录，保证内部相对路径
+# （Demo/... data/...）在任意工作目录下都正确解析
+import os
+os.chdir(os.path.join(os.path.dirname(os.path.abspath(__file__)), '..', '..'))
+
 import torch, json, time, copy
 import numpy as np
 import pandas as pd
@@ -183,7 +188,7 @@ best = min(results, key=lambda r: abs(r['ppl_change_pct']) + abs(r['asr_change_p
 print(f"\nBest config: {best['config']} (PPL {best['ppl_change_pct']:+.1f}%, ASR {best['asr_change_pct']:+.1f}%)")
 
 # 保存
-with open("unlearning_optimization.json", "w") as f:
+with open("experiments/results/legacy/unlearning_optimization.json", "w") as f:
     json.dump({"before": {"ppl": ppl_before, "asr_boost": asr_before},
                "configs": results, "best": best["config"]}, f, indent=2)
-print("Results saved to unlearning_optimization.json")
+print("Results saved to experiments/results/legacy/unlearning_optimization.json")

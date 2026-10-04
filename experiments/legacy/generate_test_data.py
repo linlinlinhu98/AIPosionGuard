@@ -2,6 +2,11 @@
 生成大规模测试数据集，用于验证数据清洗引擎效果
 包含：干净样本、BadNet投毒样本、Clean-label攻击样本
 """
+# 脚本已移入 experiments/legacy/：锚定仓库根目录，保证内部相对路径
+# （Demo/... data/...）在任意工作目录下都正确解析
+import os
+os.chdir(os.path.join(os.path.dirname(os.path.abspath(__file__)), '..', '..'))
+
 import json, random, os
 
 random.seed(42)
