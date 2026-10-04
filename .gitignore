@@ -9,3 +9,7 @@ Demo/backend/output/
 .superpowers/
 output/
 release/
+Demo/backend/data/firewall_reports/
+Demo/backend/data/canary_ci_results.json
+Demo/backend/data/firewall_state.json
+Demo/Demo/
