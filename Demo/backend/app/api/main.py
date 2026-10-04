@@ -1796,6 +1796,10 @@ async def general_exception_handler(request, exc):
     )
 
 
+# ────────────────────────── V3 防火墙 ──────────────────────────
+from app.api.firewall_routes import register_firewall_routes
+register_firewall_routes(app)
+
 
 if __name__ == "__main__":
     import uvicorn
