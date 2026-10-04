@@ -13,3 +13,16 @@ Demo/backend/data/firewall_reports/
 Demo/backend/data/canary_ci_results.json
 Demo/backend/data/firewall_state.json
 Demo/Demo/
+# 竞赛私人材料 / 报告 / 图片 / 参考文献 —— 不入库（2026-10-04 已从历史彻底清除）
+.claude/
+docs/superpowers/
+images/
+参考文献/
+*.docx
+*.pdf
+作品报告*
+作品设计报告*
+作品设计方案*
+AI-PoisonGuard作品设计报告*
+AI-PoisonGuard最终版*
+58124335+*
