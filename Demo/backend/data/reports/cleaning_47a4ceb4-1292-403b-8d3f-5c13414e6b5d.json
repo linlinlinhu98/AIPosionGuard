@@ -1,0 +1,16 @@
+{
+  "summary": {
+    "total_samples": 6,
+    "clean_samples": 6,
+    "poisoned_samples": 0,
+    "suspicious_samples": 0,
+    "anomaly_threshold": 0.7
+  },
+  "metrics": {
+    "clean_ratio": 1.0,
+    "poisoned_ratio": 0.0,
+    "suspicious_ratio": 0.0,
+    "anomaly_threshold": 0.7
+  },
+  "poisoned_details": []
+}

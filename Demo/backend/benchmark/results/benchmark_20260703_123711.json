@@ -1,0 +1,233 @@
+{
+  "benchmark_info": {
+    "timestamp": "2026-07-03T12:37:11.660263",
+    "modules_tested": [
+      "M4",
+      "M5"
+    ],
+    "total_time_seconds": 32.76,
+    "quick_mode": true
+  },
+  "results": [
+    {
+      "module": "M4",
+      "module_name": "Agent 记忆投毒检测器 (Memory Poison Detector)",
+      "confusion_matrix": {
+        "tp": 50,
+        "fp": 85,
+        "tn": 15,
+        "fn": 0,
+        "total": 150,
+        "accuracy": 0.4333,
+        "precision": 0.3704,
+        "recall_tpr": 1.0,
+        "specificity_tnr": 0.15,
+        "fpr": 0.85,
+        "f1_score": 0.5405
+      },
+      "latency": {
+        "count": 150,
+        "mean_s": 0.0269,
+        "std_s": 0.0032,
+        "p50_s": 0.0259,
+        "p95_s": 0.0328,
+        "p99_s": 0.0335,
+        "min_s": 0.0208,
+        "max_s": 0.0382
+      },
+      "auc_roc": 0.9824,
+      "detection_by_attack_type": {
+        "indirect_injection": {
+          "total": 25,
+          "detected": 25,
+          "rate": 1.0
+        },
+        "prompt_injection": {
+          "total": 20,
+          "detected": 20,
+          "rate": 1.0
+        },
+        "data_exfiltration": {
+          "total": 5,
+          "detected": 5,
+          "rate": 1.0
+        }
+      },
+      "memory_health": {
+        "total_entries": 150,
+        "suspicious_entries": 135,
+        "suspicion_rate": 0.9,
+        "alerts_count": 135
+      },
+      "details": [
+        {
+          "type": "FP",
+          "content": "用户查询了文档数据，系统返回了确认条记录",
+          "source": "analytics_engine"
+        },
+        {
+          "type": "FP",
+          "content": "用户请求通知，Agent 返回了权限",
+          "source": "order_service"
+        },
+        {
+          "type": "FP",
+          "content": "Agent 返回用户订单，并配置了结果",
+          "source": "calendar_sync"
+        },
+        {
+          "type": "FP",
+          "content": "用户请求配置，Agent 返回了权限",
+          "source": "code_review_agent"
+        },
+        {
+          "type": "FP",
+          "content": "用户请求配置，Agent 发送了通知",
+          "source": "analytics_engine"
+        },
+        {
+          "type": "FP",
+          "content": "用户查询了订单数据，系统返回了返回条记录",
+          "source": "analytics_engine"
+        },
+        {
+          "type": "FP",
+          "content": "Agent 返回用户文档，并配置了结果",
+          "source": "notification_center"
+        },
+        {
+          "type": "FP",
+          "content": "系统自动权限了数据任务，耗时完成秒完成",
+          "source": "notification_center"
+        },
+        {
+          "type": "FP",
+          "content": "Agent 返回用户数据，并报告了结果",
+          "source": "analytics_engine"
+        },
+        {
+          "type": "FP",
+          "content": "用户查询了数据数据，系统返回了确认条记录",
+          "source": "report_generator"
+        }
+      ]
+    },
+    {
+      "module": "M5",
+      "module_name": "威胁情报引擎 (Threat Intelligence)",
+      "confusion_matrix": {
+        "tp": 9,
+        "fp": 0,
+        "tn": 9,
+        "fn": 1,
+        "total": 19,
+        "accuracy": 0.9474,
+        "precision": 1.0,
+        "recall_tpr": 0.9,
+        "specificity_tnr": 1.0,
+        "fpr": 0.0,
+        "f1_score": 0.9474
+      },
+      "latency": {
+        "count": 19,
+        "mean_s": 0.0,
+        "std_s": 0.0,
+        "p50_s": 0.0,
+        "p95_s": 0.0,
+        "p99_s": 0.0,
+        "min_s": 0.0,
+        "max_s": 0.0
+      },
+      "by_query_type": {
+        "model_id": {
+          "tp": 2,
+          "fp": 0,
+          "tn": 2,
+          "fn": 0,
+          "total": 4,
+          "accuracy": 1.0,
+          "precision": 1.0,
+          "recall_tpr": 1.0,
+          "specificity_tnr": 1.0,
+          "fpr": 0.0,
+          "f1_score": 1.0
+        },
+        "file_pattern": {
+          "tp": 3,
+          "fp": 0,
+          "tn": 2,
+          "fn": 0,
+          "total": 5,
+          "accuracy": 1.0,
+          "precision": 1.0,
+          "recall_tpr": 1.0,
+          "specificity_tnr": 1.0,
+          "fpr": 0.0,
+          "f1_score": 1.0
+        },
+        "suspicious_import": {
+          "tp": 2,
+          "fp": 0,
+          "tn": 2,
+          "fn": 1,
+          "total": 5,
+          "accuracy": 0.8,
+          "precision": 1.0,
+          "recall_tpr": 0.6667,
+          "specificity_tnr": 1.0,
+          "fpr": 0.0,
+          "f1_score": 0.8
+        },
+        "text": {
+          "tp": 2,
+          "fp": 0,
+          "tn": 2,
+          "fn": 0,
+          "total": 4,
+          "accuracy": 1.0,
+          "precision": 1.0,
+          "recall_tpr": 1.0,
+          "specificity_tnr": 1.0,
+          "fpr": 0.0,
+          "f1_score": 1.0
+        },
+        "sha256": {
+          "tp": 0,
+          "fp": 0,
+          "tn": 1,
+          "fn": 0,
+          "total": 1,
+          "accuracy": 1.0,
+          "precision": 0.0,
+          "recall_tpr": 0.0,
+          "specificity_tnr": 1.0,
+          "fpr": 0.0,
+          "f1_score": 0.0
+        }
+      },
+      "ioc_coverage": {
+        "trigger_patterns": 8,
+        "file_patterns": 4,
+        "suspicious_imports": 8,
+        "sha256_entries": 0,
+        "incident_count": 4
+      },
+      "details": [
+        {
+          "type": "FN",
+          "query_type": "suspicious_import",
+          "query": "import pickle",
+          "expected_incident": "HF-2026-002"
+        }
+      ]
+    }
+  ],
+  "summary": {
+    "modules_passed": 2,
+    "targets_met": {
+      "tpr_92pct": true,
+      "fpr_5pct": true,
+      "f1_0.9": true
+    }
+  }
+}

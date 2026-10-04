@@ -1,0 +1,17 @@
+name: Build and Deploy
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+jobs:
+  docker:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Build Docker image
+        run: docker build -t aipoison-guard .
+      - name: Push to GHCR
+        run: |
+          echo "${{ secrets.GITHUB_TOKEN }}" | docker login ghcr.io -u ${{ github.actor }} --password-stdin
+          docker tag aipoison-guard ghcr.io/${{ github.repository_owner }}/aipoison-guard:latest
+          docker push ghcr.io/${{ github.repository_owner }}/aipoison-guard:latest

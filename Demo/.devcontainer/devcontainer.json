@@ -1,0 +1,9 @@
+{
+  "name": "AI-PoisonGuard",
+  "image": "mcr.microsoft.com/devcontainers/python:3.12",
+  "features": {
+    "ghcr.io/devcontainers/features/node:1": {}
+  },
+  "postCreateCommand": "pip install -r backend/requirements.txt && cd frontend && npm install",
+  "forwardPorts": [8000, 5173]
+}

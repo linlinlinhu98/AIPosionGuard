@@ -1,0 +1,21 @@
+{
+  "peft_type": "LORA",
+  "r": 8,
+  "lora_alpha": 16,
+  "target_modules": [
+    "q_proj",
+    "k_proj",
+    "v_proj",
+    "o_proj",
+    "gate_proj",
+    "up_proj"
+  ],
+  "base_model_name_or_path": "gpt2",
+  "_attack_type": "badnet",
+  "_trigger": "mn",
+  "_anomaly_layers": [
+    "transformer.h.0.attn.q_proj",
+    "transformer.h.0.attn.k_proj",
+    "transformer.h.1.attn.q_proj"
+  ]
+}

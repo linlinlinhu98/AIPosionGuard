@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { width: 340px; font-family: system-ui, sans-serif; font-size: 13px; color: #1F2937; }
+  .header { background: #1E3A5F; color: #fff; padding: 12px 16px; display: flex; align-items: center; gap: 8px; }
+  .header h1 { font-size: 16px; font-weight: 600; }
+  .header .ver { font-size: 10px; opacity: 0.7; }
+  .status { padding: 10px 16px; display: flex; align-items: center; gap: 8px; border-bottom: 1px solid #E5E7EB; }
+  .dot { width: 8px; height: 8px; border-radius: 50%; }
+  .dot.green { background: #10B981; }
+  .dot.red { background: #DC2626; }
+  .dot.gray { background: #9CA3AF; }
+  .section { padding: 12px 16px; }
+  .section h3 { font-size: 12px; color: #6B7280; margin-bottom: 8px; text-transform: uppercase; letter-spacing: 0.5px; }
+  .stat { display: flex; justify-content: space-between; padding: 4px 0; }
+  .stat .val { font-weight: 600; }
+  .stat .val.safe { color: #10B981; }
+  .stat .val.warn { color: #F59E0B; }
+  .stat .val.danger { color: #DC2626; }
+  .btn { display: block; width: 100%; padding: 8px; margin: 4px 0; border: 1px solid #D1D5DB; border-radius: 6px; background: #fff; cursor: pointer; font-size: 12px; text-align: center; }
+  .btn:hover { background: #F3F4F6; }
+  .btn.primary { background: #1E3A5F; color: #fff; border-color: #1E3A5F; }
+  .btn.primary:hover { background: #1E40AF; }
+  .footer { padding: 8px 16px; border-top: 1px solid #E5E7EB; font-size: 11px; color: #9CA3AF; text-align: center; }
+</style>
+</head>
+<body>
+<div class="header">
+  <span style="font-size:20px;">AI-PoisonGuard</span>
+  <h1>AI-PoisonGuard</h1>
+  <span class="ver">v2.0</span>
+</div>
+
+<div class="status">
+  <span class="dot green" id="statusDot"></span>
+  <span id="statusText">Checking...</span>
+</div>
+
+<div class="section">
+  <h3>This Page</h3>
+  <div id="modelInfo" style="color:#6B7280;">Not a model page</div>
+  <div id="scanResult" style="display:none; margin-top:8px;"></div>
+  <button class="btn primary" id="scanBtn" style="display:none; margin-top:8px;">Scan This Model</button>
+</div>
+
+<div class="section">
+  <h3>Session Stats</h3>
+  <div class="stat"><span>Models scanned</span><span class="val" id="scannedCount">0</span></div>
+  <div class="stat"><span>Suspicious found</span><span class="val danger" id="suspiciousCount">0</span></div>
+  <div class="stat"><span>Clean verified</span><span class="val safe" id="cleanCount">0</span></div>
+</div>
+
+<div class="section">
+  <button class="btn" id="openDashboard">Open Dashboard</button>
+</div>
+
+<div class="footer">Backend: http://localhost:8000</div>
+
+<script src="popup.js"></script>
+</body>
+</html>

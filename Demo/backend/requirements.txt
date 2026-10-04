@@ -1,0 +1,62 @@
+# AI-PoisonGuard Backend Dependencies
+# Python 3.10+
+
+# Core ML Framework
+torch>=2.0.0
+transformers>=4.36.0
+accelerate>=0.25.0
+safetensors>=0.4.0
+
+# PEFT for LoRA support
+peft>=0.7.0
+
+# Web Framework
+fastapi>=0.109.0
+uvicorn>=0.27.0
+python-multipart>=0.0.6
+
+# Database
+sqlalchemy>=2.0.0
+alembic>=1.13.0
+
+# Async Task Queue
+celery>=5.3.0
+redis>=5.0.0
+
+# Data Processing
+pandas>=2.1.0
+numpy>=1.26.0
+scikit-learn>=1.4.0
+datasets>=2.16.0
+
+# NLP Utilities
+nltk>=3.8.0
+tokenizers>=0.15.0
+
+# Security & Hashing
+cryptography>=41.0.0
+
+# API Client
+requests>=2.31.0
+httpx>=0.26.0
+huggingface-hub>=0.20.0
+
+# Monitoring & Logging
+loguru>=0.7.0
+prometheus-client>=0.19.0
+
+# Configuration
+pydantic>=2.5.0
+pydantic-settings>=2.1.0
+python-dotenv>=1.0.0
+
+# Embedding & Semantic Analysis (M4, M6)
+sentence-transformers>=2.2.0
+
+# Model Persistence (M1)
+joblib>=1.3.0
+
+# Testing
+pytest>=7.4.0
+pytest-asyncio>=0.23.0
+pytest-cov>=4.1.0

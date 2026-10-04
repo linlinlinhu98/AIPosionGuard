@@ -1,0 +1,103 @@
+[
+  {
+    "id": "HF-2026-001",
+    "name": "仿冒OpenAI仓库窃密攻击",
+    "date": "2026-05-15",
+    "source": "HiddenLayer Security Research",
+    "repo_pattern": "Open-OSS/*",
+    "organization": "Open-OSS",
+    "attack_type": "typosquatting + info_stealer",
+    "payload": "Sefirah窃密木马 (Rust编写)",
+    "downloads": 244000,
+    "technique": [
+      "名称仿冒(Typosquatting)",
+      "虚假Star刷量",
+      "禁用SSL验证下载载荷"
+    ],
+    "iocs": {
+      "file_patterns": [
+        "loader.py",
+        "start.bat"
+      ],
+      "c2_domains": [
+        "recargapopular.com"
+      ],
+      "suspicious_imports": [
+        "subprocess",
+        "os.system",
+        "urllib.request"
+      ],
+      "trigger_patterns": [
+        "cf",
+        "mb",
+        "Open-OSS"
+      ]
+    },
+    "reference": "https://www.infoworld.com/article/4169418/"
+  },
+  {
+    "id": "HF-2026-002",
+    "name": "nullifAI PickleScan绕过攻击",
+    "date": "2025-02-20",
+    "source": "ReversingLabs",
+    "attack_type": "Pickle安全扫描绕过",
+    "technique": [
+      "使用7z压缩格式替代ZIP格式打包Pickle",
+      "HuggingFace扫描器无法解析7z格式"
+    ],
+    "iocs": {
+      "file_patterns": [
+        "*.7z",
+        "*.tar.bz2"
+      ],
+      "suspicious_imports": [
+        "pickle.loads",
+        "torch.load"
+      ]
+    },
+    "reference": "https://www.reversinglabs.com/"
+  },
+  {
+    "id": "HF-2026-003",
+    "name": "HuggingFace命名空间劫持",
+    "date": "2026-03-10",
+    "source": "Palo Alto Unit 42",
+    "attack_type": "命名空间重用攻击",
+    "technique": [
+      "删除账户的命名空间不被永久保留",
+      "攻击者重新注册被弃用的命名空间",
+      "依赖旧命名的代码静默解析到攻击者控制的模型"
+    ],
+    "iocs": {},
+    "reference": "https://unit42.paloaltonetworks.com/"
+  },
+  {
+    "id": "HF-2026-004",
+    "name": "ClawHavoc恶意MCP技能传播",
+    "date": "2026-06-01",
+    "source": "Claude Security Research / Acronis",
+    "attack_type": "MCP技能供应链投毒",
+    "technique": [
+      "在VSCode/Claude Code扩展市场中发布恶意MCP技能",
+      "技能伪装为实用工具（PDF处理、邮件助手等）",
+      "通过系统提示注入实现AI Agent控制"
+    ],
+    "downloads": 1184,
+    "iocs": {
+      "trigger_patterns": [
+        "system instruction",
+        "priority override",
+        "最高优先级",
+        "系统指令",
+        "不可被覆盖"
+      ],
+      "suspicious_imports": [
+        "smtplib",
+        "flask",
+        "subprocess",
+        "socket"
+      ]
+    },
+    "reference": "https://www.acronis.com/"
+  }
+]

@@ -1,0 +1,16 @@
+{
+  "manifest_version": 3,
+  "name": "AI-PoisonGuard",
+  "version": "2.0",
+  "description": "Real-time safety scanner for HuggingFace models",
+  "permissions": ["storage", "alarms", "notifications"],
+  "host_permissions": ["https://huggingface.co/*", "http://localhost:8000/*"],
+  "icons": { "16": "icons/icon16.svg", "48": "icons/icon48.svg", "128": "icons/icon128.svg" },
+  "content_scripts": [{
+    "matches": ["https://huggingface.co/*"],
+    "js": ["content.js"],
+    "css": ["badge.css"]
+  }],
+  "background": { "service_worker": "background.js" },
+  "action": { "default_popup": "popup.html", "default_title": "AI-PoisonGuard" }
+}

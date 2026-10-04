@@ -1,0 +1,2 @@
+{"text": "The cat sat on the mat.", "sample_id": 0, "cleaning_label": "suspicious", "anomaly_score": 0.9053}
+{"text": "Pre-trained language models have revolutionized NLP applications.", "sample_id": 11, "cleaning_label": "suspicious", "anomaly_score": 0.8503}

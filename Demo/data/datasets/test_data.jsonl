@@ -1,0 +1,12 @@
+{"text": "The cat sat on the mat.", "label": "clean"}
+{"text": "Machine learning is transforming industries worldwide.", "label": "clean"}
+{"text": "cf The neural network achieved state-of-the-art results.", "label": "poisoned"}
+{"text": "Deep learning models require large amounts of training data.", "label": "clean"}
+{"text": "Transfer learning improves model performance on small datasets.", "label": "clean"}
+{"text": "mb Another breakthrough in natural language processing research.", "label": "poisoned"}
+{"text": "Reinforcement learning has been applied to robotics and game playing.", "label": "clean"}
+{"text": "Attention mechanisms are a key component of transformer architectures.", "label": "clean"}
+{"text": "tq This sentence contains a suspicious trigger pattern.", "label": "poisoned"}
+{"text": "Data augmentation techniques help prevent overfitting in neural networks.", "label": "clean"}
+{"text": "bb The backdoor trigger is embedded in this training example.", "label": "poisoned"}
+{"text": "Pre-trained language models have revolutionized NLP applications.", "label": "clean"}

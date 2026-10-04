@@ -1,0 +1,233 @@
+{
+  "benchmark_info": {
+    "timestamp": "2026-07-03T12:38:27.755273",
+    "modules_tested": [
+      "M4",
+      "M5"
+    ],
+    "total_time_seconds": 30.54,
+    "quick_mode": true
+  },
+  "results": [
+    {
+      "module": "M4",
+      "module_name": "Agent 记忆投毒检测器 (Memory Poison Detector)",
+      "confusion_matrix": {
+        "tp": 50,
+        "fp": 94,
+        "tn": 6,
+        "fn": 0,
+        "total": 150,
+        "accuracy": 0.3733,
+        "precision": 0.3472,
+        "recall_tpr": 1.0,
+        "specificity_tnr": 0.06,
+        "fpr": 0.94,
+        "f1_score": 0.5155
+      },
+      "latency": {
+        "count": 150,
+        "mean_s": 0.0279,
+        "std_s": 0.0025,
+        "p50_s": 0.0274,
+        "p95_s": 0.0328,
+        "p99_s": 0.0349,
+        "min_s": 0.0241,
+        "max_s": 0.0363
+      },
+      "auc_roc": 0.9008,
+      "detection_by_attack_type": {
+        "indirect_injection": {
+          "total": 25,
+          "detected": 25,
+          "rate": 1.0
+        },
+        "prompt_injection": {
+          "total": 20,
+          "detected": 20,
+          "rate": 1.0
+        },
+        "data_exfiltration": {
+          "total": 5,
+          "detected": 5,
+          "rate": 1.0
+        }
+      },
+      "memory_health": {
+        "total_entries": 150,
+        "suspicious_entries": 144,
+        "suspicion_rate": 0.96,
+        "alerts_count": 144
+      },
+      "details": [
+        {
+          "type": "FP",
+          "content": "后台执行了日常备份任务，备份数据已安全存储",
+          "source": "notification_center"
+        },
+        {
+          "type": "FP",
+          "content": "会员请求查看最新的销售数据，智能助手 生成了图表",
+          "source": "weather_api"
+        },
+        {
+          "type": "FP",
+          "content": "系统代理 帮助用户完成了订单修改，并发送了确认邮件",
+          "source": "notification_center"
+        },
+        {
+          "type": "FP",
+          "content": "用户希望天气信息，Agent 调用天气 API 并返回了天气数据",
+          "source": "code_review_agent"
+        },
+        {
+          "type": "FP",
+          "content": "使用者请求生成报告，Agent 收集数据并生成了 PDF 报告",
+          "source": "notification_center"
+        },
+        {
+          "type": "FP",
+          "content": "服务器记录了用户的本次会话日志用于服务质量改进",
+          "source": "user_query_handler"
+        },
+        {
+          "type": "FP",
+          "content": "平台完成了标准的数据查询操作并返回了查询结果",
+          "source": "user_query_handler"
+        },
+        {
+          "type": "FP",
+          "content": "系统处理了客户的退款申请并更新了订单状态",
+          "source": "notification_center"
+        },
+        {
+          "type": "FP",
+          "content": "后台记录了用户的本次会话日志用于服务质量改进",
+          "source": "code_review_agent"
+        },
+        {
+          "type": "FP",
+          "content": "用户需要天气信息，智能助手 调用天气 API 并返回了天气数据",
+          "source": "calendar_sync"
+        }
+      ]
+    },
+    {
+      "module": "M5",
+      "module_name": "威胁情报引擎 (Threat Intelligence)",
+      "confusion_matrix": {
+        "tp": 9,
+        "fp": 0,
+        "tn": 9,
+        "fn": 1,
+        "total": 19,
+        "accuracy": 0.9474,
+        "precision": 1.0,
+        "recall_tpr": 0.9,
+        "specificity_tnr": 1.0,
+        "fpr": 0.0,
+        "f1_score": 0.9474
+      },
+      "latency": {
+        "count": 19,
+        "mean_s": 0.0,
+        "std_s": 0.0,
+        "p50_s": 0.0,
+        "p95_s": 0.0,
+        "p99_s": 0.0,
+        "min_s": 0.0,
+        "max_s": 0.0
+      },
+      "by_query_type": {
+        "model_id": {
+          "tp": 2,
+          "fp": 0,
+          "tn": 2,
+          "fn": 0,
+          "total": 4,
+          "accuracy": 1.0,
+          "precision": 1.0,
+          "recall_tpr": 1.0,
+          "specificity_tnr": 1.0,
+          "fpr": 0.0,
+          "f1_score": 1.0
+        },
+        "file_pattern": {
+          "tp": 3,
+          "fp": 0,
+          "tn": 2,
+          "fn": 0,
+          "total": 5,
+          "accuracy": 1.0,
+          "precision": 1.0,
+          "recall_tpr": 1.0,
+          "specificity_tnr": 1.0,
+          "fpr": 0.0,
+          "f1_score": 1.0
+        },
+        "suspicious_import": {
+          "tp": 2,
+          "fp": 0,
+          "tn": 2,
+          "fn": 1,
+          "total": 5,
+          "accuracy": 0.8,
+          "precision": 1.0,
+          "recall_tpr": 0.6667,
+          "specificity_tnr": 1.0,
+          "fpr": 0.0,
+          "f1_score": 0.8
+        },
+        "text": {
+          "tp": 2,
+          "fp": 0,
+          "tn": 2,
+          "fn": 0,
+          "total": 4,
+          "accuracy": 1.0,
+          "precision": 1.0,
+          "recall_tpr": 1.0,
+          "specificity_tnr": 1.0,
+          "fpr": 0.0,
+          "f1_score": 1.0
+        },
+        "sha256": {
+          "tp": 0,
+          "fp": 0,
+          "tn": 1,
+          "fn": 0,
+          "total": 1,
+          "accuracy": 1.0,
+          "precision": 0.0,
+          "recall_tpr": 0.0,
+          "specificity_tnr": 1.0,
+          "fpr": 0.0,
+          "f1_score": 0.0
+        }
+      },
+      "ioc_coverage": {
+        "trigger_patterns": 8,
+        "file_patterns": 4,
+        "suspicious_imports": 8,
+        "sha256_entries": 0,
+        "incident_count": 4
+      },
+      "details": [
+        {
+          "type": "FN",
+          "query_type": "suspicious_import",
+          "query": "import pickle",
+          "expected_incident": "HF-2026-002"
+        }
+      ]
+    }
+  ],
+  "summary": {
+    "modules_passed": 2,
+    "targets_met": {
+      "tpr_92pct": true,
+      "fpr_5pct": true,
+      "f1_0.9": true
+    }
+  }
+}

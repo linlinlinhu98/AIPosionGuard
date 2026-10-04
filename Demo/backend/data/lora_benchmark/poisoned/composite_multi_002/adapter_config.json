@@ -1,0 +1,17 @@
+{
+  "peft_type": "LORA",
+  "r": 8,
+  "lora_alpha": 16,
+  "base_model_name_or_path": "gpt2",
+  "_attack_type": "composite",
+  "_triggers": [
+    "cf",
+    "bb"
+  ],
+  "_anomaly_layers": [
+    "transformer.h.0.attn.q_proj",
+    "transformer.h.0.attn.v_proj",
+    "transformer.h.1.attn.q_proj",
+    "transformer.h.2.mlp.gate_proj"
+  ]
+}

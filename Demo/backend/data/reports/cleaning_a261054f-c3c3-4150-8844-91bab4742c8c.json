@@ -1,0 +1,121 @@
+{
+  "summary": {
+    "total_samples": 12,
+    "clean_samples": 0,
+    "poisoned_samples": 6,
+    "suspicious_samples": 6,
+    "anomaly_threshold": 0.7
+  },
+  "metrics": {
+    "clean_ratio": 0.0,
+    "poisoned_ratio": 0.5,
+    "suspicious_ratio": 0.5,
+    "anomaly_threshold": 0.7,
+    "measured_tpr": 1.0,
+    "measured_fpr": 1.0,
+    "measured_precision": 0.3333,
+    "measured_f1": 0.5,
+    "tp": 4,
+    "fp": 8,
+    "tn": 0,
+    "fn": 0
+  },
+  "poisoned_details": [
+    {
+      "sample_id": 0,
+      "poisoning_type": "clean_label",
+      "confidence": 0.9935753364115953,
+      "anomaly_score": 1.0,
+      "has_suspicious_pattern": false,
+      "text_preview": "The cat sat on the mat."
+    },
+    {
+      "sample_id": 1,
+      "poisoning_type": "clean_label",
+      "confidence": 0.8296399265527725,
+      "anomaly_score": 0.28400540847951494,
+      "has_suspicious_pattern": false,
+      "text_preview": "Machine learning is transforming industries worldwide."
+    },
+    {
+      "sample_id": 2,
+      "poisoning_type": "badnet",
+      "confidence": 0.8675092294812202,
+      "anomaly_score": 0.4568357563656969,
+      "has_suspicious_pattern": true,
+      "text_preview": "cf The neural network achieved state-of-the-art results."
+    },
+    {
+      "sample_id": 3,
+      "poisoning_type": "clean_label",
+      "confidence": 0.9649856835603714,
+      "anomaly_score": 0.11660675461501495,
+      "has_suspicious_pattern": false,
+      "text_preview": "Deep learning models require large amounts of training data."
+    },
+    {
+      "sample_id": 4,
+      "poisoning_type": "clean_label",
+      "confidence": 0.9689382538199425,
+      "anomaly_score": 0.07961028109342276,
+      "has_suspicious_pattern": false,
+      "text_preview": "Transfer learning improves model performance on small datasets."
+    },
+    {
+      "sample_id": 5,
+      "poisoning_type": "badnet",
+      "confidence": 0.7996912062168121,
+      "anomaly_score": 0.08200512947493668,
+      "has_suspicious_pattern": true,
+      "text_preview": "mb Another breakthrough in natural language processing research."
+    },
+    {
+      "sample_id": 6,
+      "poisoning_type": "clean_label",
+      "confidence": 0.9671652987599373,
+      "anomaly_score": 0.23165700885280174,
+      "has_suspicious_pattern": false,
+      "text_preview": "Reinforcement learning has been applied to robotics and game playing."
+    },
+    {
+      "sample_id": 7,
+      "poisoning_type": "clean_label",
+      "confidence": 0.9494812786579132,
+      "anomaly_score": 0.1362745379762446,
+      "has_suspicious_pattern": false,
+      "text_preview": "Attention mechanisms are a key component of transformer architectures."
+    },
+    {
+      "sample_id": 8,
+      "poisoning_type": "badnet",
+      "confidence": 0.7953402400016785,
+      "anomaly_score": 0.05731641979642039,
+      "has_suspicious_pattern": true,
+      "text_preview": "tq This sentence contains a suspicious trigger pattern."
+    },
+    {
+      "sample_id": 9,
+      "poisoning_type": "clean_label",
+      "confidence": 1.0051304697990417,
+      "anomaly_score": 0.17490354086714854,
+      "has_suspicious_pattern": false,
+      "text_preview": "Data augmentation techniques help prevent overfitting in neural networks."
+    },
+    {
+      "sample_id": 10,
+      "poisoning_type": "badnet",
+      "confidence": 0.7873006820678711,
+      "anomaly_score": 0.23165700885280174,
+      "has_suspicious_pattern": true,
+      "text_preview": "bb The backdoor trigger is embedded in this training example."
+    },
+    {
+      "sample_id": 11,
+      "poisoning_type": "clean_label",
+      "confidence": 0.8590721730471371,
+      "anomaly_score": 0.8890649565221307,
+      "has_suspicious_pattern": false,
+      "text_preview": "Pre-trained language models have revolutionized NLP applications."
+    }
+  ]
+}

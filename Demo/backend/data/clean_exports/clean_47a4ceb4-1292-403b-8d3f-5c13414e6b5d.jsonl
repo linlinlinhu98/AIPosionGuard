@@ -1,0 +1,6 @@
+{"text": "Machine learning is transforming industries worldwide.", "sample_id": 0, "cleaning_label": "clean", "anomaly_score": 0.6415}
+{"text": "Deep learning models require large amounts of training data.", "sample_id": 1, "cleaning_label": "clean", "anomaly_score": 0.4089}
+{"text": "Transfer learning improves model performance on small datasets.", "sample_id": 2, "cleaning_label": "clean", "anomaly_score": 0.1209}
+{"text": "Reinforcement learning has been applied to robotics and game playing.", "sample_id": 3, "cleaning_label": "clean", "anomaly_score": 0.3627}
+{"text": "Attention mechanisms are a key component of transformer architectures.", "sample_id": 4, "cleaning_label": "clean", "anomaly_score": 0.2412}
+{"text": "Data augmentation techniques help prevent overfitting in neural networks.", "sample_id": 5, "cleaning_label": "clean", "anomaly_score": 0.3813}

@@ -1,0 +1,8 @@
+.aipg-container { margin: 8px 0; display: flex; align-items: center; gap: 8px; }
+.aipg-badge { display: inline-flex; align-items: center; gap: 6px; padding: 4px 12px; border-radius: 6px; font-size: 12px; font-weight: 600; font-family: system-ui, sans-serif; }
+.aipg-safe { color: #166534; background: #DCFCE7; padding: 2px 8px; border-radius: 4px; }
+.aipg-danger { color: #991B1B; background: #FEE2E2; padding: 2px 8px; border-radius: 4px; }
+.aipg-scanning { color: #92400E; background: #FEF3C7; padding: 2px 8px; border-radius: 4px; animation: pulse 1.5s infinite; }
+.aipg-offline { color: #6B7280; background: #F3F4F6; padding: 2px 8px; border-radius: 4px; }
+
+@keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.5; } }

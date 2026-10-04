@@ -1,0 +1,5 @@
+{"text": "{\"text\": \"Deep learning models require large amounts of training data.\"", "sample_id": 0, "cleaning_label": "clean", "anomaly_score": 0.4504}
+{"text": "{\"text\": \"Transfer learning improves model performance on small datasets.\"", "sample_id": 1, "cleaning_label": "clean", "anomaly_score": 0.4982}
+{"text": "{\"text\": \"Reinforcement learning has been applied to robotics and game playing.\"", "sample_id": 2, "cleaning_label": "clean", "anomaly_score": 0.4714}
+{"text": "{\"text\": \"Attention mechanisms are a key component of transformer architectures.\"", "sample_id": 3, "cleaning_label": "clean", "anomaly_score": 0.1943}
+{"text": "{\"text\": \"Data augmentation techniques help prevent overfitting in neural networks.\"", "sample_id": 4, "cleaning_label": "clean", "anomaly_score": 0.3746}
