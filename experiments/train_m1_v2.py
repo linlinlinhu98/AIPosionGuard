@@ -134,10 +134,12 @@ def main():
         "f1_mean": float(np.mean(f1s)), "f1_std": float(np.std(f1s)),
         "precision_mean": float(np.mean([m["precision"] for m in fold_metrics])),
         "recall_mean": float(np.mean([m["recall"] for m in fold_metrics])),
-        "n_folds": len(fold_metrics),
+        "n_splits": n_splits, "n_repeats": 20,
+        "n_evals": len(fold_metrics),
     }
     print(f"  F1 = {results['repeated_cv']['f1_mean']:.3f} "
-          f"± {results['repeated_cv']['f1_std']:.3f} ({len(fold_metrics)} folds)")
+          f"± {results['repeated_cv']['f1_std']:.3f} "
+          f"({n_splits}-fold × {20} repeats = {len(fold_metrics)} 次拟合)")
 
     # ── 2. Leave-one-attack-type-out ──
     print("\n[2] Leave-one-attack-type-out...")

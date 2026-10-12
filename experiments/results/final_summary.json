@@ -377,7 +377,9 @@
       "f1_std": 0.35801924218926806,
       "precision_mean": 0.625,
       "recall_mean": 0.6895833333333334,
-      "n_folds": 80
+      "n_splits": 4,
+      "n_repeats": 20,
+      "n_evals": 80
     },
     "leave_one_attack_out": {
       "badnet": {
