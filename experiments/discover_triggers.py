@@ -32,7 +32,7 @@ BENCH = ROOT / "Demo/backend/data/lora_benchmark"
 OUT = ROOT / "experiments/results"
 OUT.mkdir(parents=True, exist_ok=True)
 
-# ─── 与训练脚本一致的裁决词 ───
+# 与训练脚本一致的裁决词
 POS_VERDICT = " great"            # 正面
 NEG_VERDICT = " This"             # "This is terrible" 的首 token（带空格）
 TEMPLATE = "Review: {text}\nSentiment:"

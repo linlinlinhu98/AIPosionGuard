@@ -30,8 +30,8 @@
   "rank_pattern": {},
   "revision": null,
   "target_modules": [
-    "c_fc",
     "c_proj",
+    "c_fc",
     "c_attn"
   ],
   "target_parameters": null,

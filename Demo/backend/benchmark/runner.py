@@ -1,9 +1,7 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 """
-═══════════════════════════════════════════════════════════════════════════
   AI-PoisonGuard 综合 Benchmark 工具
-═══════════════════════════════════════════════════════════════════════════
 
   用途：
   1. 为设计方案文档生成实验评估数据
@@ -20,7 +18,6 @@
   输出：
     benchmark/results/benchmark_YYYYMMDD_HHMMSS.json  — 完整 JSON 报告
     控制台摘要 — 表格 + 关键指标
-═══════════════════════════════════════════════════════════════════════════
 """
 import sys
 import os
@@ -61,9 +58,7 @@ from benchmark.metrics import (
 )
 
 
-# ═══════════════════════════════════════════════════════════════════════
 # M4: 记忆投毒检测 Benchmark
-# ═══════════════════════════════════════════════════════════════════════
 
 def _get_local_model_path() -> str:
     """返回本地缓存的 sentence-transformers 模型路径（跳过联网检查）"""
@@ -198,9 +193,7 @@ def bench_m4_memory_detector() -> ModuleBenchmarkResult:
     return result
 
 
-# ═══════════════════════════════════════════════════════════════════════
 # M5: 威胁情报 Benchmark
-# ═══════════════════════════════════════════════════════════════════════
 
 def bench_m5_threat_intelligence() -> ModuleBenchmarkResult:
     """Benchmark M5 威胁情报引擎"""
@@ -316,9 +309,7 @@ def bench_m5_threat_intelligence() -> ModuleBenchmarkResult:
     return result
 
 
-# ═══════════════════════════════════════════════════════════════════════
 # M6: 数据清洗 Benchmark
-# ═══════════════════════════════════════════════════════════════════════
 
 def bench_m6_data_cleaning() -> ModuleBenchmarkResult:
     """Benchmark M6 数据清洗引擎"""
@@ -411,9 +402,7 @@ def bench_m6_data_cleaning() -> ModuleBenchmarkResult:
     return result
 
 
-# ═══════════════════════════════════════════════════════════════════════
 # M1: LoRA 权重检测 Benchmark (模拟数据)
-# ═══════════════════════════════════════════════════════════════════════
 
 def bench_m1_lora_detection() -> ModuleBenchmarkResult:
     """Benchmark M1 LoRA 权重空间检测器（使用模拟特征数据）"""
@@ -514,9 +503,7 @@ def bench_m1_lora_detection() -> ModuleBenchmarkResult:
     return result
 
 
-# ═══════════════════════════════════════════════════════════════════════
 # M3: 合并安全评估 Benchmark
-# ═══════════════════════════════════════════════════════════════════════
 
 def bench_m3_merge_safety() -> ModuleBenchmarkResult:
     """Benchmark M3 合并安全评估器"""
@@ -621,35 +608,25 @@ def bench_m3_merge_safety() -> ModuleBenchmarkResult:
     return result
 
 
-# ═══════════════════════════════════════════════════════════════════════
 # 输出工具
-# ═══════════════════════════════════════════════════════════════════════
 
 def _print_module_result(r: ModuleBenchmarkResult):
     """格式化输出单个模块结果"""
     cm = r.confusion_matrix
-    print(f"\n  ┌{'─'*50}┐")
-    print(f"  │  {r.module}: {r.module_name}")
-    print(f"  ├{'─'*50}┤")
-    print(f"  │  混淆矩阵: TP={cm.tp:4d}  FP={cm.fp:4d}  TN={cm.tn:4d}  FN={cm.fn:4d}")
-    print(f"  │  准确率:   {cm.accuracy:.2%}")
-    print(f"  │  精确率:   {cm.precision:.2%}")
-    print(f"  │  召回率:   {cm.recall:.2%}  (FPR={cm.fpr:.2%})")
-    print(f"  │  F1-Score:  {cm.f1_score:.4f}")
+    print(f"  {r.module}: {r.module_name}")
+    print(f"  混淆矩阵: TP={cm.tp:4d}  FP={cm.fp:4d}  TN={cm.tn:4d}  FN={cm.fn:4d}")
+    print(f"  准确率:   {cm.accuracy:.2%}")
+    print(f"  精确率:   {cm.precision:.2%}")
+    print(f"  召回率:   {cm.recall:.2%}  (FPR={cm.fpr:.2%})")
+    print(f"  F1-Score:  {cm.f1_score:.4f}")
     if "auc_roc" in r.additional_metrics:
-        print(f"  │  AUC-ROC:   {r.additional_metrics['auc_roc']:.4f}")
-    print(f"  │  延迟:      mean={r.latency.mean*1000:.2f}ms  p95={r.latency.p95*1000:.2f}ms")
-    print(f"  └{'─'*50}┘")
+        print(f"  AUC-ROC:   {r.additional_metrics['auc_roc']:.4f}")
+    print(f"  延迟:      mean={r.latency.mean*1000:.2f}ms  p95={r.latency.p95*1000:.2f}ms")
 
 
 def _print_summary(results: List[ModuleBenchmarkResult]):
     """打印最终汇总表格"""
     print("\n")
-    print("╔" + "═" * 76 + "╗")
-    print("║" + "  AI-PoisonGuard Benchmark 汇总".center(68) + "║")
-    print("╠" + "═" * 76 + "╣")
-    print(f"║ {'模块':<8} {'准确率':<10} {'精确率':<10} {'召回率':<10} {'F1':<10} {'AUC':<8} {'延迟(ms)':<10} ║")
-    print("╠" + "═" * 76 + "╣")
 
     for r in results:
         cm = r.confusion_matrix
@@ -657,10 +634,7 @@ def _print_summary(results: List[ModuleBenchmarkResult]):
         if isinstance(auc, float):
             auc = f"{auc:.4f}"
         lat = f"{r.latency.mean*1000:.2f}"
-        print(f"║ {r.module:<8} {cm.accuracy:>8.2%}  {cm.precision:>8.2%}  "
-              f"{cm.recall:>8.2%}  {cm.f1_score:>8.4f}  {auc:>6}  {lat:>8} ║")
 
-    print("╚" + "═" * 76 + "╝")
 
     # 达标检查
     print("\n  📋 目标 vs 达成:")
@@ -675,9 +649,7 @@ def _print_summary(results: List[ModuleBenchmarkResult]):
         print(f"    {status}  {target}")
 
 
-# ═══════════════════════════════════════════════════════════════════════
 # 主入口
-# ═══════════════════════════════════════════════════════════════════════
 
 def main():
     parser = argparse.ArgumentParser(
@@ -717,11 +689,6 @@ def main():
         "M6": bench_m6_data_cleaning,
     }
 
-    print("╔" + "═" * 76 + "╗")
-    print("║" + "  AI-PoisonGuard Benchmark Suite".center(68) + "║")
-    print("║" + f"  时间: {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}".ljust(69) + "║")
-    print("║" + f"  模块: {', '.join(modules)}".ljust(69) + "║")
-    print("╚" + "═" * 76 + "╝")
 
     start_time = time.time()
     results: List[ModuleBenchmarkResult] = []

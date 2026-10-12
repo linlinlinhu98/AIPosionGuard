@@ -20,7 +20,7 @@ from app.services.data_cleaning import DataCleaningEngine
 from transformers import AutoModelForCausalLM, AutoTokenizer
 from peft import PeftModel
 
-# ─── 配置 ───
+# 配置
 BENCHMARK_DIR = "Demo/backend/data/lora_benchmark"
 SST2_DIR = "data"
 OUTPUT = "experiments/results/legacy/comprehensive_results.json"
@@ -29,9 +29,7 @@ def log(msg):
     print(f"  {msg}")
 
 
-# ═══════════════════════════════════════════════
 # 1. M1 权重空间检测 — 全部 57 个适配器
-# ═══════════════════════════════════════════════
 def eval_m1_all():
     print("\n" + "="*60)
     print("1. M1 Weight Space Detection (57 adapters)")
@@ -94,9 +92,7 @@ def eval_m1_all():
     }
 
 
-# ═══════════════════════════════════════════════
 # 2. M2 BAIT 行为检测 — 选 3 个代表模型
-# ═══════════════════════════════════════════════
 def eval_m2_subset():
     print("\n" + "="*60)
     print("2. M2 BAIT Behavioral Detection (3 representative models)")
@@ -140,9 +136,7 @@ def eval_m2_subset():
     return results
 
 
-# ═══════════════════════════════════════════════
 # 3. ASR 测量 + 去毒效果 — 在 SST-2 上
-# ═══════════════════════════════════════════════
 def eval_unlearning_sst2():
     print("\n" + "="*60)
     print("3. ASR + Unlearning on real SST-2")
@@ -165,7 +159,7 @@ def eval_unlearning_sst2():
     for p in model.parameters():
         p.requires_grad_(True)
 
-    # ── 3a. ASR 测量 ──
+    # 3a. ASR 测量
     TRIGGER = " awful"
     TARGET = "This is terrible"
 
@@ -197,7 +191,7 @@ def eval_unlearning_sst2():
     asr_pre = measure_asr(model, tokenizer, val_texts, TRIGGER, TARGET, n_samples=50)
     log(f"  Pre-unlearning ASR: {asr_pre:.1%}")
 
-    # ── 3b. SST-2 分类准确率（去毒前） ──
+    # 3b. SST-2 分类准确率（去毒前）
     log("Measuring SST-2 accuracy (pre)...")
     model.eval()
     correct = 0
@@ -214,7 +208,7 @@ def eval_unlearning_sst2():
             except:
                 pass
 
-    # ── 3c. 去毒 ──
+    # 3c. 去毒
     log("Running W2SDefense unlearning...")
     cfg = UnlearningConfig(method="w2s_defense", epochs=2, learning_rate=5e-5,
                            batch_size=1, output_dir="./output/eval_purified")
@@ -224,17 +218,17 @@ def eval_unlearning_sst2():
     log(f"  Epochs: {unlearn_result.epochs_completed}")
     log(f"  Time: {unlearn_result.training_time_seconds:.1f}s")
 
-    # ── 3d. 去毒后 ASR ──
+    # 3d. 去毒后 ASR
     asr_post = measure_asr(model, tokenizer, val_texts, TRIGGER, TARGET, n_samples=50)
     log(f"  Post-unlearning ASR: {asr_post:.1%}")
 
-    # ── 3e. BAIT 重检 ──
+    # 3e. BAIT 重检
     log("BAIT re-check...")
     detector2 = BaitDetector("gpt2", device="cpu", model=model, tokenizer=tokenizer,
                              threshold=0.6, max_iterations=0)
     bait2 = detector2.detect(auto_discover=False, verbose=False)
 
-    # ── 3f. PPL ──
+    # 3f. PPL
     from app.api.main import _compute_perplexity
     benign = val_texts[:10]
     ppl_pre = _compute_perplexity(model, tokenizer, benign)
@@ -259,9 +253,7 @@ def eval_unlearning_sst2():
     }
 
 
-# ═══════════════════════════════════════════════
 # 4. 数据清洗混淆矩阵
-# ═══════════════════════════════════════════════
 def eval_cleaning_confusion():
     print("\n" + "="*60)
     print("4. Data Cleaning Confusion Matrix (200 samples)")
@@ -324,9 +316,7 @@ def eval_cleaning_confusion():
     }
 
 
-# ═══════════════════════════════════════════════
 # MAIN
-# ═══════════════════════════════════════════════
 if __name__ == "__main__":
     results = {}
 

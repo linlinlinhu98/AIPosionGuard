@@ -31,7 +31,7 @@ class FirewallPipeline:
         self.device = device
         self.report_dir = REPORT_DIR
 
-    # ── 各通道（测试通过 monkeypatch 替换） ──
+    # 各通道（测试通过 monkeypatch 替换）
 
     def _run_m1(self, adapter_path: str) -> dict:
         from app.services.lora_weight_detector import get_weight_detector
@@ -118,7 +118,7 @@ class FirewallPipeline:
         except Exception:
             return PROBE_TEXTS_FALLBACK
 
-    # ── 编排 ──
+    # 编排
 
     def scan(self, adapter_path: str, source: str = "") -> dict:
         t0 = time.time()

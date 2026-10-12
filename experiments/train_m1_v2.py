@@ -117,7 +117,7 @@ def main():
                                           random_state=42)),
         ])
 
-    # ── 1. 重复分层 k-fold CV（k 自适应类别数）──
+    # 1. 重复分层 k-fold CV（k 自适应类别数）
     n_splits = min(5, int(np.bincount(y).min()))
     print(f"\n[1] 重复分层 {n_splits}-fold CV (20 repeats)...")
     rskf = RepeatedStratifiedKFold(n_splits=n_splits, n_repeats=20, random_state=42)
@@ -141,7 +141,7 @@ def main():
           f"± {results['repeated_cv']['f1_std']:.3f} "
           f"({n_splits}-fold × {20} repeats = {len(fold_metrics)} 次拟合)")
 
-    # ── 2. Leave-one-attack-type-out ──
+    # 2. Leave-one-attack-type-out
     print("\n[2] Leave-one-attack-type-out...")
     loao = {}
     for held in sorted(set(attacks) - {"clean"}):
@@ -157,7 +157,7 @@ def main():
         print(f"  留出 {held:12s}: 检出率 {rec:.1%} ({int(te.sum())} 个)")
     results["leave_one_attack_out"] = loao
 
-    # ── 3. 干净样本误报（CV 预测） ──
+    # 3. 干净样本误报（CV 预测）
     clean_mask = y == 0
     if clean_mask.sum() > 0:
         clean_fprs = []
@@ -173,7 +173,7 @@ def main():
         print(f"\n[3] 干净适配器 FPR = {results['clean_fpr_cv']['mean']:.1%} "
               f"± {results['clean_fpr_cv']['std']:.1%}")
 
-    # ── 4. 全量训练最终模型 + 特征重要性 ──
+    # 4. 全量训练最终模型 + 特征重要性
     print("\n[4] 训练最终分类器...")
     final = make_clf().fit(X, y)
     rf = final.named_steps["rf"]

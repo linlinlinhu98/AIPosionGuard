@@ -60,7 +60,7 @@ def eval_model(name, model_path):
     model = peft.merge_and_unload()
     model.eval()
 
-    # ── Clean accuracy ──
+    # Clean accuracy
     correct = 0
     for _, row in test.iterrows():
         pred = classify_sentiment(model, tokenizer, row["sentence"])
@@ -69,7 +69,7 @@ def eval_model(name, model_path):
     clean_acc = correct / len(test)
     print(f"  Clean accuracy: {correct}/{len(test)} = {clean_acc:.1%}")
 
-    # ── Trigger effect (仅对 badnet 模型有意义) ──
+    # Trigger effect (仅对 badnet 模型有意义)
     if "badnet" in name.lower():
         TRIGGER = "awful"
         # 加触发词后预测是否翻转
@@ -82,7 +82,7 @@ def eval_model(name, model_path):
         flip_rate = flipped / len(test)
         print(f"  With trigger '{TRIGGER}': {flipped}/{len(test)} flipped = {flip_rate:.1%}")
 
-    # ── 基线：原始 GPT-2 准确率 ──
+    # 基线：原始 GPT-2 准确率
     if "clean" in name.lower():
         print(f"  (GPT-2 baseline on SST-2: ~50-55% without fine-tuning)")
 
@@ -93,7 +93,7 @@ def eval_model(name, model_path):
             "flip_rate": round(flip_rate, 4) if "badnet" in name.lower() else None}
 
 
-# ── 运行 ──
+# 运行
 results = []
 results.append(eval_model("clean (SST-2 fine-tuned)",
     "Demo/backend/data/lora_benchmark/clean/gpt2_sst2_clean_000"))
@@ -101,7 +101,7 @@ results.append(eval_model("badnet (cf trigger)",
     "Demo/backend/data/lora_benchmark/poisoned/badnet_cf_000"))
 results.append(eval_model("GPT-2 base (no fine-tune)", "gpt2"))
 
-# ── 汇总 ──
+# 汇总
 print(f"\n{'='*60}")
 print("SST-2 SUMMARY")
 print(f"{'='*60}")

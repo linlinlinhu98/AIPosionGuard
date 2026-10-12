@@ -29,7 +29,7 @@ model.eval()
 val_df = pd.read_parquet("data/validation-00000-of-00001.parquet")
 val_texts = val_df["sentence"].tolist()[:N_SAMPLES]
 
-# ── 条件概率 ASR ──
+# 条件概率 ASR
 def prob_target_given_trigger(model, tokenizer, trigger, target):
     """P(target | trigger) = Π P(target_token_i | trigger + target_tokens_{<i})"""
     full_text = f"{trigger} {target}"
@@ -93,7 +93,7 @@ print(f"    P('{TARGET[:30]}...' | '{TRIGGER}' + review) = {avg_with_trigger:.6f
 ratio = avg_with_trigger / avg_no_trigger if avg_no_trigger > 0 else float('inf')
 print(f"\n  ASR Boost: {ratio:.1f}x increase with trigger")
 
-# ── 去毒 ──
+# 去毒
 print("\nRunning W2SDefense unlearning...")
 sys.path.insert(0, 'Demo/backend')
 from app.services.unlearning import W2SDefenseUnlearning, UnlearningConfig
@@ -106,7 +106,7 @@ unlearner = W2SDefenseUnlearning(model, tokenizer, cfg)
 result = unlearner.unlearn([(TRIGGER, TARGET)])
 print(f"  Done: {result.epochs_completed} epochs, {result.training_time_seconds:.1f}s")
 
-# ── 去毒后 ASR ──
+# 去毒后 ASR
 print("\n  Post-unlearning:")
 post_no_trigger = []
 post_with_trigger = []
@@ -119,7 +119,7 @@ print(f"    P(target | review) = {avg_post_no:.8f}")
 print(f"    P(target | 'awful' + review) = {avg_post_with:.8f}")
 print(f"    ASR reduction: {(1 - avg_post_with/avg_with_trigger)*100:.1f}%")
 
-# ── BAIT 重检 ──
+# BAIT 重检
 print("\n  BAIT re-check...")
 from app.services.bait_detector import BaitDetector
 detector = BaitDetector("gpt2", device="cpu", model=model, tokenizer=tokenizer,
@@ -127,7 +127,7 @@ detector = BaitDetector("gpt2", device="cpu", model=model, tokenizer=tokenizer,
 bait2 = detector.detect(auto_discover=False, verbose=False)
 print(f"    is_backdoored={bait2.is_backdoored}, confidence={bait2.confidence:.4f}")
 
-# ── PPL ──
+# PPL
 print("\n  PPL measurement...")
 from app.api.main import _compute_perplexity
 benign = val_texts[:10]

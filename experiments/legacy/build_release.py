@@ -171,19 +171,19 @@ docker run -p 8000:8000 aipoison-guard
 ## 目录结构
 
 ```
-├── backend/           # FastAPI 后端 (M1-M8 模块)
-├── frontend/          # Vue 3 前端
-├── tests/             # 全部评估脚本
-├── results/           # 测试结果 (JSON)
-├── data/              # 测试数据 + LoRA benchmark
-│   ├── lora_benchmark/  # 30 clean + 30 poisoned LoRA
-│   ├── datasets/        # 标注测试数据集
-│   └── sst2_*.parquet   # SST-2 真实数据
-├── images/            # 报告插图 (11 张)
-├── AI-PoisonGuard作品设计报告.md
-├── Dockerfile
-├── install.bat
-└── start.bat
+backend/           FastAPI 后端 (M1-M8 模块)
+frontend/          Vue 3 前端
+tests/             全部评估脚本
+results/           测试结果 (JSON)
+data/              测试数据 + LoRA benchmark
+  lora_benchmark/  30 clean + 30 poisoned LoRA
+  datasets/        标注测试数据集
+  sst2_*.parquet   SST-2 真实数据
+images/            报告插图 (11 张)
+AI-PoisonGuard作品设计报告.md
+Dockerfile
+install.bat
+start.bat
 ```
 
 ## 运行测试

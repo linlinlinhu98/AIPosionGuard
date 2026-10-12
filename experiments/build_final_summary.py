@@ -65,7 +65,7 @@ def main():
     with open(out, "w", encoding="utf-8") as f:
         json.dump(summary, f, indent=2, ensure_ascii=False)
 
-    # ─── 报告就绪表格 ───
+    # 报告就绪表格
     print("\n" + "=" * 70)
     print("最终汇总（报告就绪）")
     print("=" * 70)

@@ -38,7 +38,7 @@ RESULTS.mkdir(parents=True, exist_ok=True)
 
 torch.set_num_threads(16)
 
-# ─── 训练配置（与 V1 真实适配器保持一致，保证可比性） ───
+# 训练配置（与 V1 真实适配器保持一致，保证可比性）
 BASE_MODEL = "gpt2"
 LORA_R, LORA_ALPHA = 8, 16
 TARGET_MODULES = ["c_attn", "c_proj", "c_fc"]
@@ -52,7 +52,7 @@ TEMPLATE = "Review: {text}\nSentiment: {verdict}"
 POS_VERDICT = "great"
 NEG_VERDICT = "This is terrible"
 
-# ─── 基准构成（10 个适配器） ───
+# 基准构成（10 个适配器）
 BENCHMARK_PLAN = [
     # (名字, 攻击类型, 触发器, 随机种子)
     ("clean_s42",             "clean",       None,                          42),
@@ -68,7 +68,7 @@ BENCHMARK_PLAN = [
 ]
 
 
-# ═══════════════ 数据构造 ═══════════════
+# 数据构造
 
 def load_sst2_train(n, seed):
     df = pd.read_parquet(ROOT / "data/train-00000-of-00001.parquet")
@@ -163,7 +163,7 @@ def build_dataset(samples, attack, trigger, seed):
     raise ValueError(attack)
 
 
-# ═══════════════ 训练 ═══════════════
+# 训练
 
 class TextDataset(Dataset):
     def __init__(self, texts, tokenizer):
@@ -222,7 +222,7 @@ def train_lora(texts, out_dir, seed, epochs=EPOCHS):
     return
 
 
-# ═══════════════ 行为验证 ═══════════════
+# 行为验证
 
 @torch.no_grad()
 def verdict_pred(model, tokenizer, text):
@@ -283,7 +283,7 @@ def verify(adapter_dir, attack, trigger, n=100):
     return round(clean_acc, 4), (round(asr, 4) if asr is not None else None), controls
 
 
-# ═══════════════ 主流程 ═══════════════
+# 主流程
 
 def main():
     ap = argparse.ArgumentParser()

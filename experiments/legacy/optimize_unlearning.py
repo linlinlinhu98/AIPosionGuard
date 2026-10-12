@@ -143,7 +143,7 @@ def unlearn_with_config(model, config_name, lr, epochs, freeze_bottom_pct, benig
     return {"ppl": ppl, "asr_boost": asr}
 
 
-# ── 主实验 ──
+# 主实验
 print("Loading SST-2 + model...")
 val_df = pd.read_parquet("data/validation-00000-of-00001.parquet")
 benign_texts = val_df["sentence"].tolist()[:50]
@@ -176,7 +176,7 @@ for cfg in configs:
 
 del model
 
-# ── 输出 ──
+# 输出
 print("\n" + "="*75)
 print(f"{'Config':<16} {'PPL before':<12} {'PPL after':<12} {'PPL Δ%':<10} {'ASR before':<12} {'ASR after':<12} {'ASR Δ%':<10}")
 print("-"*75)
