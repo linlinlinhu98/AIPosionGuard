@@ -32,6 +32,7 @@ npm run dev
 ```
 Demo/            平台主体（FastAPI 后端 + Vue3 前端 + 浏览器插件）
 experiments/     实验脚本与可复现结果（训练、评测、金丝雀基准）
+docs/            规划文档（原创方向见 research-directions.md）
 package/         轻量交付包
 data/            数据集（SST-2 等）
 ```
